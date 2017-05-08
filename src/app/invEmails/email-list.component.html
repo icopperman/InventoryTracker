@@ -1,0 +1,72 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+
+    <!-- Filter the Products   -->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="listFilter" />
+            </div>
+        </div>
+        <div class="row" *ngIf="listFilter">
+            <div class="col-md-6">
+                <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+        </div>
+
+        <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+
+        <div class="table-responsive">
+            <table class="table"
+                   *ngIf="emails && emails.length">
+                <thead>
+                    <tr>
+                        <!--<th>
+                            <button class="btn btn-primary"
+                                (click)="toggleImage()">
+                                {{showImage ? "Hide" : "Show"}} Image
+                            </button>
+                        </th>-->
+                        <th>Campus</th>
+                        <th>Unit Name</th>
+                        <th>Email</th>
+                        <!--<th>Price</th>
+                        <th>5 Star Rating</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let email of emails | emailFilter:listFilter">
+                        <!--<td>
+                            <img *ngIf="showImage && email.imageUrl"
+                                 [src]="email.imageUrl"
+                                 [title]="email.emailName | uppercase"
+                                 [style.width.px]="imageWidth" 
+                                 [style.margin.px]="imageMargin">
+                        </td>-->
+                        <td>{{ email.Campus }}</td>
+                        <td>{{ email.Unit }}</td>
+                        <td><a [routerLink]="[email.tblIdx]" 
+                               [queryParams]="{filterBy: listFilter, showImage: showImage}">
+                            {{email.EmailAddress}}
+                            </a>
+                        </td>
+                        <!--<td>{{ email.emailAddress | lowercase }}</td>-->
+                        <!--<td>
+                            <ai-star [rating]="email.starRating">
+                            </ai-star>
+                       </td>-->
+                       <td>
+                            <a class="btn btn-primary" 
+                               [routerLink]="[email.tblIdx, 'edit']">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

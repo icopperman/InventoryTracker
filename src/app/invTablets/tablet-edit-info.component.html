@@ -1,0 +1,78 @@
+<div class="panel-body">
+    <form class="form-horizontal"
+          novalidate
+          #tabletForm="ngForm">
+        <fieldset>
+            <legend>Basic tablet Information</legend>
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (tabletNameVar.touched || 
+                                              tabletNameVar.dirty || tablet.id !== 0) && 
+                                              !tabletNameVar.valid }">
+                <label class="col-md-2 control-label" 
+                        for="tabletNameId">tablet Name</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="tabletNameId" 
+                            type="text" 
+                            placeholder="Name (required)"
+                            required
+                            minlength="3"
+                            [(ngModel)] = tablet.tabletName
+                            name="tabletName"
+                            #tabletNameVar="ngModel" />
+                    <span class="help-block" *ngIf="(tabletNameVar.touched ||
+                                                     tabletNameVar.dirty || tablet.id !== 0) &&
+                                                     tabletNameVar.errors">
+                        <span *ngIf="tabletNameVar.errors.required">
+                            tablet name is required.
+                        </span>
+                        <span *ngIf="tabletNameVar.errors.minlength">
+                            tablet name must be at least three characters.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (tabletCodeVar.touched || 
+                                              tabletCodeVar.dirty || tablet.id !== 0) && 
+                                              !tabletCodeVar.valid }">
+                <label class="col-md-2 control-label" for="tabletCodeId">tablet Code</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="tabletCodeId" 
+                            type="text" 
+                            placeholder="Code (required)"
+                            required
+                            [(ngModel)] = tablet.tabletCode
+                            name="tabletCode"
+                            #tabletCodeVar="ngModel" />
+                    <span class="help-block" *ngIf="(tabletCodeVar.touched ||
+                                                     tabletCodeVar.dirty || tablet.id !== 0) &&
+                                                     tabletCodeVar.errors">
+                        <span *ngIf="tabletCodeVar.errors.required">
+                            tablet code is required.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="descriptionId">Description</label>
+
+                <div class="col-md-8">
+                    <textarea class="form-control" 
+                            id="descriptionId" 
+                            placeholder="Description"
+                            rows=3
+                            [(ngModel)] = tablet.description
+                            name="description"></textarea>
+                </div>
+            </div>
+
+            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+        </fieldset>
+    </form>
+</div>

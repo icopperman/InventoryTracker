@@ -1,0 +1,78 @@
+<div class="panel-body">
+    <form class="form-horizontal"
+          novalidate
+          #userForm="ngForm">
+        <fieldset>
+            <legend>Basic user Information</legend>
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (userNameVar.touched || 
+                                              userNameVar.dirty || user.id !== 0) && 
+                                              !userNameVar.valid }">
+                <label class="col-md-2 control-label" 
+                        for="userNameId">user Name</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="userNameId" 
+                            type="text" 
+                            placeholder="Name (required)"
+                            required
+                            minlength="3"
+                            [(ngModel)] = user.userName
+                            name="userName"
+                            #userNameVar="ngModel" />
+                    <span class="help-block" *ngIf="(userNameVar.touched ||
+                                                     userNameVar.dirty || user.id !== 0) &&
+                                                     userNameVar.errors">
+                        <span *ngIf="userNameVar.errors.required">
+                            user name is required.
+                        </span>
+                        <span *ngIf="userNameVar.errors.minlength">
+                            user name must be at least three characters.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (userCodeVar.touched || 
+                                              userCodeVar.dirty || user.id !== 0) && 
+                                              !userCodeVar.valid }">
+                <label class="col-md-2 control-label" for="userCodeId">user Code</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="userCodeId" 
+                            type="text" 
+                            placeholder="Code (required)"
+                            required
+                            [(ngModel)] = user.userCode
+                            name="userCode"
+                            #userCodeVar="ngModel" />
+                    <span class="help-block" *ngIf="(userCodeVar.touched ||
+                                                     userCodeVar.dirty || user.id !== 0) &&
+                                                     userCodeVar.errors">
+                        <span *ngIf="userCodeVar.errors.required">
+                            user code is required.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="descriptionId">Description</label>
+
+                <div class="col-md-8">
+                    <textarea class="form-control" 
+                            id="descriptionId" 
+                            placeholder="Description"
+                            rows=3
+                            [(ngModel)] = user.description
+                            name="description"></textarea>
+                </div>
+            </div>
+
+            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+        </fieldset>
+    </form>
+</div>

@@ -1,0 +1,73 @@
+<div class="panel panel-primary" *ngIf="email">
+    <div class="panel-heading" style="font-size:large">
+        {{pageTitle + ": " + email.EmailAddress}}
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">Email:</div>
+                    <div class="col-md-6">{{email.EmailAddress}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Campus:</div>
+                    <div class="col-md-6">{{email.Campus}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Unit:</div>
+                    <div class="col-md-6">{{email.Unit}}</div>
+                </div>
+                <!--<div class="row">
+                    <div class="col-md-3">Availability:</div>
+                    <div class="col-md-6">{{email.releaseDate}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Price:</div>
+                    <div class="col-md-6">{{email.price|currency:"USD":true}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">5 Star Rating:</div>
+                    <div class="col-md-6">
+                        <ai-star [rating]="email.starRating">
+                        </ai-star>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Category:</div>
+                    <div class="col-md-6">{{email.category}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Tags:</div>
+                    <div class="col-md-6">{{email.tags}}</div>
+                </div>
+            </div>-->
+
+            <div class="col-md-6" *ngIf="email.imageUrl">
+                <img class="center-block img-responsive" 
+                     [style.width.px]="200" 
+                     [style.margin.px]="2" 
+                     [src]="email.imageUrl"
+                     [title]="email.EmailAddress">
+            </div>
+        </div>
+        <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+    </div>
+
+    <div class="panel-footer">
+        <!--<a class="btn btn-default"
+           [routerLink]="['email.emails']"
+           [preserveQueryParams]="true">
+            <i class="glyphicon glyphicon-chevron-left"></i> Back
+        </a>-->
+        <a class="btn btn-default"
+           [routerLink]="['/emails']"
+           queryParamsHandling="preserve">
+            <i class="glyphicon glyphicon-chevron-left"></i> Back
+        </a>
+        <a class="btn btn-primary" style="width:80px;margin-left:10px" 
+           [routerLink]="['edit']">
+            Edit
+        </a>
+    </div>
+</div>
