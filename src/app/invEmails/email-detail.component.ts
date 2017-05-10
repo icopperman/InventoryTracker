@@ -18,6 +18,7 @@ export class EmailDetailComponent implements OnInit {
     ngOnInit(): void {
         
         this.email = this.route.snapshot.data['email'];
+   
         //this.units = this.route.snapshot.data['units'];
     }
 }

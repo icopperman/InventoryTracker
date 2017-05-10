@@ -4,8 +4,10 @@
     "author": "Deborah Kurata",
     "description": "Package for the Acme Product Management sample application used in the Angular Routing Pluralsight course",
     "scripts": {
-        "build": "tsc -p src/",
-        "build:watch": "tsc -p src/ -w",
+        "build": "tsc ",
+    "build:watch": "tsc  -w",
+        "xbuild": "tsc -p src/",
+    "xbuild:watch": "tsc -p src/ -w",
         "serve": "lite-server -c=bs-config.json",
         "prestart": "npm run build",
         "start": "concurrently \"npm run build:watch\" \"npm run serve\"",

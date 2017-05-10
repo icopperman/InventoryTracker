@@ -15,19 +15,26 @@ export class EmailEditInfoComponent implements OnInit {
     email: IEmail;
     units: IUnit[];
     selectedUnit: string;
+    campuses: string[];
 
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit(): void {
+        
+
         this.route.parent.data.subscribe(data => {
             this.email = data['email'];
             //this.email.Unit = this.selectedUnit;
-
+            
+            
             this.units = data['units'];
 
             if (this.emailForm) {
                 this.emailForm.reset();
             }
+
+            this.campuses = ["E", "W"];
+            console.log(this.campuses);
         });
     }
 }

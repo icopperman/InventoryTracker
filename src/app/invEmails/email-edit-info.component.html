@@ -42,15 +42,16 @@
 
                 <div class="col-md-8">
                     <select class="form-control" 
-                            id="emailCodeId" 
+                            id="emailCampus" 
                             type="text" 
                             placeholder="Campus (required)"
                             required
                             [(ngModel)] = email.Campus
-                            name="emailCode"
+                            name="emailCampus"
                             #emailCodeVar="ngModel" >
-                            <option value="East">East</option>
-                            <option value="West">West</option>
+                            <option *ngFor="let c of ['E', 'W']" [value]="c" >{{c}}</option>
+
+                           
                     </select>
                     <span class="help-block" *ngIf="(emailCodeVar.touched ||
                                                      emailCodeVar.dirty || email.tblIdx !== 0) &&
@@ -78,10 +79,10 @@
                             name="unitsSelector"
                             placeholder="Select a Unit"
                             required
-                            [(ngModel)]="selectedUnit" 
+                            [(ngModel)]="email.Unit" 
                             #emailUnitsVar
                         >
-                        <option *ngFor="let unit of units" [ngValue]="unit">{{unit.unitName}}</option>
+                        <option *ngFor="let unit of units" [value]="unit.unitName" >{{unit.unitName}}</option>
                     </select>
 
                             <span class="help-block" *ngIf="(emailUnitsVar.touched ||

@@ -113,7 +113,7 @@ export class EmailService {
             Unit: null,
             EmailAddress: null,
             Units: null, 
-            selectUnit: null
+            selectedUnit: null
 
         };
     }

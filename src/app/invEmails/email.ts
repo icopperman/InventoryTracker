@@ -21,5 +21,5 @@ export interface IEmail {
     EmailAddress: string;
     Units: string[];
     createdDate?: string;
-    selectUnit: IUnit;
+    selectedUnit: IUnit;
 }

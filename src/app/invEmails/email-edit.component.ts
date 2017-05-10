@@ -54,7 +54,7 @@ export class EmailEditComponent implements OnInit {
             
             if ( eunit == aunit.unitName) {
 
-                this.email.selectUnit = aunit;
+                this.email.selectedUnit = aunit;
                 break;
             }
         }
