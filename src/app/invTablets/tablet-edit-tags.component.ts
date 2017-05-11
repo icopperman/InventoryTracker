@@ -22,12 +22,12 @@ export class TabletEditTagsComponent implements OnInit {
     // Add the defined tags
     addTags(): void {
         let tagArray = this.newTags.split(',');
-        this.tablet.tags = this.tablet.tags ? this.tablet.tags.concat(tagArray) : tagArray;
+        // this.tablet.tags = this.tablet.tags ? this.tablet.tags.concat(tagArray) : tagArray;
         this.newTags = '';
     }
 
     // Remove the tag from the array of tags.
     removeTag(idx: number): void {
-        this.tablet.tags.splice(idx, 1);
+        // this.tablet.tags.splice(idx, 1);
     }
 }

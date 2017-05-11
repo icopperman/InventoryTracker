@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as _ from 'lodash';
 import { MessageService } from '../messages/message.service';
 
 import { ITablet } from './tablet';
 import { TabletService } from './tablet.service';
+import { IUnit } from '../invUnits/unit';
 
 @Component({
     templateUrl: './app/invTablets/tablet-edit.component.html',
@@ -17,8 +18,18 @@ export class TabletEditComponent implements OnInit {
     private currentTablet: ITablet;
     private originalTablet: ITablet;
     private dataIsValid: { [key: string]: boolean } = {};
+     private units: IUnit[];
 
     get isDirty(): boolean {
+        let currTablet;
+
+        if (_.isEmpty(this.currentTablet) == true) {
+        
+            return false;
+        }
+        
+        currTablet = _.omit(this.currentTablet, ['selectedUnit']);
+
         return JSON.stringify(this.originalTablet) !== JSON.stringify(this.currentTablet);
     }
 
@@ -27,6 +38,8 @@ export class TabletEditComponent implements OnInit {
     }
     set tablet(value: ITablet) {
         this.currentTablet = value;
+        this.currentTablet.Campus = (this.currentTablet.Campus == "E" ) ? "East" : "West";
+
         // Clone the object to retain a copy
         this.originalTablet = Object.assign({}, value);
     }
@@ -39,30 +52,39 @@ export class TabletEditComponent implements OnInit {
     ngOnInit(): void {
         // Watch for changes to the resolve data
         this.route.data.subscribe(data => {
-             this.onTabletRetrieved(data['tablet']);
+             this.onTabletRetrieved(data);
         });
     }
 
-    onTabletRetrieved(tablet: ITablet): void {
-        this.tablet = tablet;
+    onTabletRetrieved(data: any): void {
+       this.tablet = data['tablet'];
+        this.units = data['units'];
 
+        for (let aunit of this.units) {
+            
+            if ( this.tablet.Unit == aunit.unitName) {
+
+                this.tablet.selectedUnit = aunit;
+                break;
+            }
+        }
         // Adjust the title
-        if (this.tablet.id === 0) {
+        if (this.tablet.tblIdx === 0) {
             this.pageTitle = 'Add Tablet';
         } else {
-            this.pageTitle = `Edit Tablet: ${this.tablet.tabletName}`;
+            this.pageTitle = `Edit Tablet: ${this.tablet.TabletName}`;
         }
     }
 
     deleteTablet(): void {
-        if (this.tablet.id === 0) {
+        if (this.tablet.tblIdx === 0) {
             // Don't delete, it was never saved.
-            this.onSaveComplete(`${this.tablet.tabletName} was deleted`);
+            this.onSaveComplete(`${this.tablet.TabletName} was deleted`);
         } else {
-            if (confirm(`Really delete the tablet: ${this.tablet.tabletName}?`)) {
-                this.tabletService.deleteTablet(this.tablet.id)
+            if (confirm(`Really delete the tablet: ${this.tablet.TabletName}?`)) {
+                this.tabletService.deleteTablet(this.tablet.tblIdx)
                     .subscribe(
-                        () => this.onSaveComplete(`${this.tablet.tabletName} was deleted`),
+                        () => this.onSaveComplete(`${this.tablet.TabletName} was deleted`),
                         (error: any) => this.errorMessage = <any>error
                     );
             }
@@ -80,9 +102,16 @@ export class TabletEditComponent implements OnInit {
 
     saveTablet(): void {
         if (this.isValid(null)) {
+             
+             if ( this.tablet.Campus.length > 1 ) {
+
+                this.tablet.Campus = (this.tablet.Campus == "East") ? "E" : "W";
+
+            }
+
             this.tabletService.saveTablet(this.tablet)
                 .subscribe(
-                    () => this.onSaveComplete(`${this.tablet.tabletName} was saved`),
+                    () => this.onSaveComplete(`${this.tablet.TabletName} was saved`),
                     (error: any) => this.errorMessage = <any>error
                 );
         } else {
@@ -112,20 +141,21 @@ export class TabletEditComponent implements OnInit {
         this.dataIsValid = {};
 
         // 'info' tab
-        if (this.tablet.tabletName &&
-            this.tablet.tabletName.length >= 3 &&
-            this.tablet.tabletCode) {
+        if (this.tablet.TabletName &&
+            this.tablet.TabletName.length >= 3 &&
+            this.tablet.Campus &&
+            this.tablet.Unit) {
             this.dataIsValid['info'] = true;
         } else {
             this.dataIsValid['info'] = false;
         }
 
         // 'tags' tab
-        if (this.tablet.category &&
-            this.tablet.category.length >= 3) {
-            this.dataIsValid['tags'] = true;
-        } else {
-            this.dataIsValid['tags'] = false;
-        }
+        // if (this.tablet.category &&
+        //     this.tablet.category.length >= 3) {
+        //     this.dataIsValid['tags'] = true;
+        // } else {
+        //     this.dataIsValid['tags'] = false;
+        // }
     }
 }

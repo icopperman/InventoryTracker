@@ -1,6 +1,8 @@
 import { Component, OnInit }  from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { IEmail } from './email';
 import { IUnit } from '../invUnits/unit';
 
@@ -12,9 +14,9 @@ import { EmailService } from './email.service';
 })
 export class EmailListComponent implements OnInit {
     pageTitle: string = 'Email List';
-    imageWidth: number = 50;
-    imageMargin: number = 2;
-    showImage: boolean = false;
+    // imageWidth: number = 50;
+    // imageMargin: number = 2;
+    // showImage: boolean = false;
     listFilter: string;
     errorMessage: string;
 
@@ -24,21 +26,24 @@ export class EmailListComponent implements OnInit {
     constructor(private emailService: EmailService,
                 private route: ActivatedRoute) { }
 
-    toggleImage(): void {
-        this.showImage = !this.showImage;
-    }
+    // toggleImage(): void {
+    //     this.showImage = !this.showImage;
+    // }
 
     ngOnInit(): void {
         this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
-        this.showImage = (this.route.snapshot.queryParams['showImage'] === 'true');
+        //this.showImage = (this.route.snapshot.queryParams['showImage'] === 'true');
         // console.log(this.route.snapshot.queryParamMap.get('filterBy'));            
 
         this.emailService.getEmails()
-                .subscribe(emails => this.emails = emails,
-                           error => this.errorMessage = <any>error);
-        // this.unitService.getUnits()
-        //         .subscribe(units => this.units = units,
-        //                    error => this.errorMessage = <any>error);
+                .subscribe(emails => {
+                    
+                    this.emails = _.map(emails, (aemail: IEmail) => { 
+                        aemail.Campus = (aemail.Campus == 'E') ? "East" : "West";
+                        return aemail;
+                    })
+                 },
+                 error => this.errorMessage = <any>error);
                  
     }
 }

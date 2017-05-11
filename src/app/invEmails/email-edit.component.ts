@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as _ from 'lodash';
 
 import { MessageService } from '../messages/message.service';
 
@@ -21,7 +22,17 @@ export class EmailEditComponent implements OnInit {
     private units: IUnit[];
     
     get isDirty(): boolean {
-        return JSON.stringify(this.originalEmail) !== JSON.stringify(this.currentEmail);
+        
+        let currEmail;
+
+        if (_.isEmpty(this.currentEmail) == true) {
+        
+            return false;
+        }
+        
+        currEmail = _.omit(this.currentEmail, ['selectedUnit']);
+
+        return JSON.stringify(this.originalEmail) !== JSON.stringify(currEmail);
     }
 
     get email(): IEmail {
@@ -29,6 +40,8 @@ export class EmailEditComponent implements OnInit {
     }
     set email(value: IEmail) {
         this.currentEmail = value;
+        this.currentEmail.Campus = (this.currentEmail.Campus == "E" ) ? "East" : "West";
+
         // Clone the object to retain a copy
         this.originalEmail = Object.assign({}, value);
     }
@@ -93,6 +106,13 @@ export class EmailEditComponent implements OnInit {
 
     saveEmail(): void {
         if (this.isValid(null)) {
+
+            if ( this.email.Campus.length > 1 ) {
+
+                this.email.Campus = (this.email.Campus == "East") ? "E" : "W";
+
+            }
+
             this.emailService.saveEmail(this.email)
                 .subscribe(
                     () => this.onSaveComplete(`${this.email.EmailAddress} was saved`),
@@ -127,6 +147,7 @@ export class EmailEditComponent implements OnInit {
         // 'info' tab
         if (this.email.EmailAddress &&
             this.email.EmailAddress.length >= 3 &&
+            this.emailValidator(this.email.EmailAddress) == true &&
             this.email.Campus &&
             this.email.Unit) {
             this.dataIsValid['info'] = true;
@@ -141,5 +162,14 @@ export class EmailEditComponent implements OnInit {
         // } else {
         //     this.dataIsValid['tags'] = false;
         // }
+    }
+    
+    emailValidator(email:string): boolean {
+        var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (!EMAIL_REGEXP.test(email)) {
+            return false;
+        }
+        return true; 
     }
 }

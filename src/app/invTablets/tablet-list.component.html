@@ -25,43 +25,44 @@
                    *ngIf="tablets && tablets.length">
                 <thead>
                     <tr>
-                        <th>
+                        <!--<th>
                             <button class="btn btn-primary"
                                 (click)="toggleImage()">
                                 {{showImage ? "Hide" : "Show"}} Image
                             </button>
-                        </th>
-                        <th>Product</th>
-                        <th>Code</th>
-                        <th>Available</th>
-                        <th>Price</th>
-                        <th>5 Star Rating</th>
+                        </th>-->
+                        <th>Tablet Name</th>
+                        <th>Campus</th>
+                        <th>Unit</th>
+                        <th>Status</th>
+                        <!--<th>5 Star Rating</th>-->
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let tablet of tablets | tabletFilter:listFilter">
-                        <td>
+                        <!--<td>
                             <img *ngIf="showImage && tablet.imageUrl"
                                  [src]="tablet.imageUrl"
                                  [title]="tablet.tabletName | uppercase"
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
-                        </td>
+                        </td>-->
+                        <td>{{ tablet.TabletName }}</td>
+                        <td>{{ tablet.Campus }}</td>
+                        <td>{{ tablet.Unit }}</td>
+                        <td>{{ tablet.Status }}</td>
+                        <!--<td>
                         <td><a [routerLink]="[tablet.id]" 
                                [queryParams]="{filterBy: listFilter, showImage: showImage}">
                             {{tablet.tabletName}}
                             </a>
                         </td>
-                        <td>{{ tablet.tabletCode | lowercase }}</td>
-                        <td>{{ tablet.releaseDate }}</td>
-                        <td>{{ tablet.price | currency:"USD":true:"1.2-2" }}</td>
-                        <td>
                             <ai-star [rating]="tablet.starRating">
                             </ai-star>
-                       </td>
+                       </td>-->
                        <td>
                             <a class="btn btn-primary" 
-                               [routerLink]="[tablet.id, 'edit']">
+                               [routerLink]="[tablet.tblIdx, 'edit']">
                                 Edit
                             </a>
                         </td>

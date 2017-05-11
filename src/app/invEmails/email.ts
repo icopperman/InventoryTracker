@@ -1,5 +1,5 @@
 import {IUnit} from '../invUnits/unit';
-/* Defines the product entity */
+
 export interface IEmail {
     // id: number;
     // category: string;

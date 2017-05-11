@@ -95,16 +95,17 @@ export class TabletService {
             starRating: null,
             imageUrl: null,
             active: null, 
-            campus: null,
             campus1: null,
-            idTablet: 0,
+            createdDate: null,
             name: null,
             site: null,
-            tabletName: null,
             tabletCode: null,
-            unitName: null, 
-            status: null,
-            createdDate: null
+            
+            Campus: null,
+            tblIdx: 0,
+            TabletName: null,
+            Unit: null, 
+            Status: null,
 
         };
     }

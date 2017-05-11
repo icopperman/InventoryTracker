@@ -13,30 +13,41 @@ import { TabletService } from './tablet.service';
 export class TabletResolver implements Resolve<ITablet> {
 
     constructor(private tabletService: TabletService,
-                private router: Router) { }
+        private router: Router) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<ITablet> {
-        let id = route.params['id'];
+        state: RouterStateSnapshot): Observable<ITablet> {
+
         // let id = route.paramMap.get('id');
-        if (isNaN(+id)) {
-            console.log(`Tablet id was not a number: ${id}`);
-            this.router.navigate(['/tablets']);
-            return Observable.of(null);
-        }
-        return this.tabletService.getTablet(+id)
-            .map(tablet => {
-                if (tablet) {
-                    return tablet;
+        let xx = route.data;
+
+        switch (xx.idx) {
+            case 0:
+                console.log(xx.origin);
+                break;
+
+            case 1:
+            case 2:
+                let id = route.params['id'];
+                if (isNaN(+id)) {
+                    console.log(`Tablet id was not a number: ${id}`);
+                    this.router.navigate(['/tablets']);
+                    return Observable.of(null);
                 }
-                console.log(`Tablet was not found: ${id}`);
-                this.router.navigate(['/tablets']);
-                return null;
-            })
-            .catch(error => {
-                console.log(`Retrieval error: ${error}`);
-                this.router.navigate(['/products']);
-                return Observable.of(null);
-            });
+                return this.tabletService.getTablet(+id)
+                    .map(tablet => {
+                        if (tablet) {
+                            return tablet;
+                        }
+                        console.log(`Tablet was not found: ${id}`);
+                        this.router.navigate(['/tablets']);
+                        return null;
+                    })
+                    .catch(error => {
+                        console.log(`Retrieval error: ${error}`);
+                        this.router.navigate(['/tablets']);
+                        return Observable.of(null);
+                    });
+        }
     }
 }
