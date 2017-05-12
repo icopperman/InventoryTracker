@@ -50,7 +50,8 @@ import { SharedModule } from '../shared/shared.module';
           {
             path: 'info',
             component: TabletEditInfoComponent
-          },
+          }
+          //,
           // {
           //   path: 'tags',
           //   component: TabletEditTagsComponent

@@ -1,5 +1,7 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import * as _ from 'lodash';
 
 import { IUnit } from './unit';
 import { UnitService } from './unit.service';
@@ -10,28 +12,33 @@ import { UnitService } from './unit.service';
 })
 export class UnitListComponent implements OnInit {
     pageTitle: string = 'Unit List';
-    imageWidth: number = 50;
-    imageMargin: number = 2;
-    showImage: boolean = false;
+    // imageWidth: number = 50;
+    // imageMargin: number = 2;
+    // showImage: boolean = false;
     listFilter: string;
     errorMessage: string;
 
     units: IUnit[];
 
     constructor(private unitService: UnitService,
-                private route: ActivatedRoute) { }
+        private route: ActivatedRoute) { }
 
-    toggleImage(): void {
-        this.showImage = !this.showImage;
-    }
+    // toggleImage(): void {
+    //     this.showImage = !this.showImage;
+    // }
 
     ngOnInit(): void {
         this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
-        this.showImage = (this.route.snapshot.queryParams['showImage'] === 'true');
+        //        this.showImage = (this.route.snapshot.queryParams['showImage'] === 'true');
         // console.log(this.route.snapshot.queryParamMap.get('filterBy'));            
 
         this.unitService.getUnits()
-                .subscribe(units => this.units = units,
-                           error => this.errorMessage = <any>error);
+            .subscribe(units => {
+                this.units = _.map(units, (aunit: IUnit) => {
+                    aunit.campus = (aunit.campus == 'E') ? "East" : "West";
+                    return aunit;
+                })
+            },
+            error => this.errorMessage = <any>error);
     }
 }

@@ -1,13 +1,13 @@
 /* Defines the product entity */
 export interface IUnit {
-    id: number;
-    category: string;
-    tags?: string[];
-    releaseDate: string;
-    price: number;
-    description: string;
-    starRating: number;
-    imageUrl: string;
+    // id: number;
+    // category: string;
+    // tags?: string[];
+    // releaseDate: string;
+    // price: number;
+    // description: string;
+    // starRating: number;
+    // imageUrl: string;
     
     idUnit: number;
     site: string;

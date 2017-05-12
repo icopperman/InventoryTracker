@@ -24,40 +24,40 @@
                    *ngIf="units && units.length">
                 <thead>
                     <tr>
-                        <th>
+                        <!--<th>
                             <button class="btn btn-primary"
                                 (click)="toggleImage()">
                                 {{showImage ? "Hide" : "Show"}} Image
                             </button>
-                        </th>
-                        <th>Product</th>
-                        <th>Code</th>
-                        <th>Available</th>
-                        <th>Price</th>
-                        <th>5 Star Rating</th>
+                        </th>-->
+                        <th>Unit Name</th>
+                        <th>Campus</th>
+                        <th>Type</th>
+                        <!--<th>Price</th>-->
+                        <!--<th>5 Star Rating</th>-->
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let unit of units | unitFilter:listFilter">
-                        <td>
+                        <!--<td>
                             <img *ngIf="showImage && unit.imageUrl"
                                  [src]="unit.imageUrl"
                                  [title]="unit.unitName | uppercase"
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
-                        </td>
+                        </td>-->
                         <td><a [routerLink]="[unit.id]" 
                                [queryParams]="{filterBy: listFilter, showImage: showImage}">
                             {{unit.unitName}}
                             </a>
                         </td>
-                        <td>{{ unit.unitCode | lowercase }}</td>
-                        <td>{{ unit.releaseDate }}</td>
+                        <td>{{ unit.campus }}</td>
+                        <!--<td>{{ unit.releaseDate }}</td>
                         <td>{{ unit.price | currency:"USD":true:"1.2-2" }}</td>
                         <td>
                             <ai-star [rating]="unit.starRating">
                             </ai-star>
-                       </td>
+                       </td>-->
                        <td>
                             <a class="btn btn-primary" 
                                [routerLink]="[unit.id, 'edit']">

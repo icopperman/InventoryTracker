@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 
 import { ITablet } from './tablet';
-import { IUnit } from '../invUnits/unit';
-
 import { TabletService } from './tablet.service';
+
+import { IUnit } from '../invUnits/unit';
 
 @Component({
     templateUrl: './app/invTablets/tablet-list.component.html',

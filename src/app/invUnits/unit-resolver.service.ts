@@ -17,8 +17,19 @@ export class UnitResolver implements Resolve<IUnit> {
 
     resolve(route: ActivatedRouteSnapshot,
             state: RouterStateSnapshot): Observable<IUnit> {
+
         let id = route.params['id'];
         // let id = route.paramMap.get('id');
+
+        switch (xx.idx) {
+            case 0:
+                console.log(xx.origin);
+                break;
+
+            case 1:
+            case 2:
+
+                let xx = route.data;
         if (isNaN(+id)) {
             console.log(`Unit id was not a number: ${id}`);
             this.router.navigate(['/units']);
@@ -35,8 +46,9 @@ export class UnitResolver implements Resolve<IUnit> {
             })
             .catch(error => {
                 console.log(`Retrieval error: ${error}`);
-                this.router.navigate(['/products']);
+                this.router.navigate(['/units']);
                 return Observable.of(null);
             });
+        }
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as _ from 'lodash';
 import { MessageService } from '../messages/message.service';
 
 import { IUnit } from './unit';
@@ -27,6 +27,7 @@ export class UnitEditComponent implements OnInit {
     }
     set unit(value: IUnit) {
         this.currentUnit = value;
+                this.currentUnit.campus = (this.currentUnit.campus == "E" ) ? "East" : "West";
         // Clone the object to retain a copy
         this.originalUnit = Object.assign({}, value);
     }
@@ -39,15 +40,15 @@ export class UnitEditComponent implements OnInit {
     ngOnInit(): void {
         // Watch for changes to the resolve data
         this.route.data.subscribe(data => {
-             this.onUnitRetrieved(data['unit']);
+             this.onUnitRetrieved(data);
         });
     }
 
-    onUnitRetrieved(unit: IUnit): void {
-        this.unit = unit;
+    onUnitRetrieved(data: any): void {
+        this.unit = data['units'];
 
         // Adjust the title
-        if (this.unit.id === 0) {
+        if (this.unit.idUnit === 0) {
             this.pageTitle = 'Add Unit';
         } else {
             this.pageTitle = `Edit Unit: ${this.unit.unitName}`;
@@ -55,12 +56,12 @@ export class UnitEditComponent implements OnInit {
     }
 
     deleteUnit(): void {
-        if (this.unit.id === 0) {
+        if (this.unit.idUnit === 0) {
             // Don't delete, it was never saved.
             this.onSaveComplete(`${this.unit.unitName} was deleted`);
         } else {
             if (confirm(`Really delete the unit: ${this.unit.unitName}?`)) {
-                this.unitService.deleteUnit(this.unit.id)
+                this.unitService.deleteUnit(this.unit.idUnit)
                     .subscribe(
                         () => this.onSaveComplete(`${this.unit.unitName} was deleted`),
                         (error: any) => this.errorMessage = <any>error
@@ -80,6 +81,12 @@ export class UnitEditComponent implements OnInit {
 
     saveUnit(): void {
         if (this.isValid(null)) {
+            if ( this.unit.campus.length > 1 ) {
+
+                this.unit.campus = (this.unit.campus == "East") ? "E" : "W";
+
+            }
+
             this.unitService.saveUnit(this.unit)
                 .subscribe(
                     () => this.onSaveComplete(`${this.unit.unitName} was saved`),
@@ -114,18 +121,18 @@ export class UnitEditComponent implements OnInit {
         // 'info' tab
         if (this.unit.unitName &&
             this.unit.unitName.length >= 3 &&
-            this.unit.unitCode) {
+            this.unit.campus) {
             this.dataIsValid['info'] = true;
         } else {
             this.dataIsValid['info'] = false;
         }
 
         // 'tags' tab
-        if (this.unit.category &&
-            this.unit.category.length >= 3) {
-            this.dataIsValid['tags'] = true;
-        } else {
-            this.dataIsValid['tags'] = false;
-        }
+        // if (this.unit.category &&
+        //     this.unit.category.length >= 3) {
+        //     this.dataIsValid['tags'] = true;
+        // } else {
+        //     this.dataIsValid['tags'] = false;
+        // }
     }
 }

@@ -71,7 +71,7 @@ export class TabletEditComponent implements OnInit {
         // Adjust the title
         if (this.tablet.tblIdx === 0) {
             this.pageTitle = 'Add Tablet';
-        } else {
+        } else {    
             this.pageTitle = `Edit Tablet: ${this.tablet.TabletName}`;
         }
     }

@@ -6,7 +6,7 @@
             <legend>Basic Unit Information</legend>
             <div class="form-group" 
                     [ngClass]="{'has-error': (unitNameVar.touched || 
-                                              unitNameVar.dirty || unit.id !== 0) && 
+                                              unitNameVar.dirty || unit.idUnit !== 0) && 
                                               !unitNameVar.valid }">
                 <label class="col-md-2 control-label" 
                         for="unitNameId">Unit Name</label>
@@ -22,7 +22,7 @@
                             name="unitName"
                             #unitNameVar="ngModel" />
                     <span class="help-block" *ngIf="(unitNameVar.touched ||
-                                                     unitNameVar.dirty || unit.id !== 0) &&
+                                                     unitNameVar.dirty || unit.idUnit !== 0) &&
                                                      unitNameVar.errors">
                         <span *ngIf="unitNameVar.errors.required">
                             Unit name is required.
@@ -36,39 +36,54 @@
             
             <div class="form-group" 
                     [ngClass]="{'has-error': (unitCodeVar.touched || 
-                                              unitCodeVar.dirty || unit.id !== 0) && 
+                                              unitCodeVar.dirty || unit.idUnit !== 0) && 
                                               !unitCodeVar.valid }">
-                <label class="col-md-2 control-label" for="unitCodeId">Unit Code</label>
+                <label class="col-md-2 control-label" for="unitCodeId">Unit Campus</label>
 
                 <div class="col-md-8">
-                    <input class="form-control" 
+<select class="form-control" 
                             id="unitCodeId" 
-                            type="text" 
-                            placeholder="Code (required)"
+                            name="unitCodeId"
+                           
+                            placeholder="Campus (required)"
                             required
-                            [(ngModel)] = unit.unitCode
-                            name="unitCode"
-                            #unitCodeVar="ngModel" />
-                    <span class="help-block" *ngIf="(unitCodeVar.touched ||
-                                                     unitCodeVar.dirty || unit.id !== 0) &&
+                            [(ngModel)] = unit.campus
+                            (ngModelChange)="campusChanged($event)"
+                            #unitCodeVar="ngModel" >
+                    <option *ngFor="let c of ccs" [value]="c" >{{c}}</option>
+                    </select>
+                      <span class="help-block" *ngIf="(unitCodeVar.touched ||
+                                                     unitCodeVar.dirty || unit.idUnit !== 0) &&
                                                      unitCodeVar.errors">
                         <span *ngIf="unitCodeVar.errors.required">
-                            Unit code is required.
+                            Campus is required.
                         </span>
                     </span>
                 </div>
             </div>
             
             <div class="form-group">
-                <label class="col-md-2 control-label" for="descriptionId">Description</label>
+                <label class="col-md-2 control-label" for="descriptionId">Type</label>
 
                 <div class="col-md-8">
-                    <textarea class="form-control" 
-                            id="descriptionId" 
-                            placeholder="Description"
-                            rows=3
-                            [(ngModel)] = unit.description
-                            name="description"></textarea>
+                    <select class="form-control"
+                            id="descriptionId"
+                            name="descriptionId"
+                            placeholder="Select a Unit Type"
+                            required
+                            [(ngModel)]="unit.active" 
+                            (ngModelChange)="typeChanged($event)"
+                            #tabletUnitsVar
+e                     >
+                        <option *ngFor="let t of types" [value]="t" >{{t}}</option>
+                    </select>
+                         <span class="help-block" *ngIf="(tabletUnitsVar.touched ||
+                                                     tabletUnitsVar.dirty || unit.idUnit !== 0) &&
+                                                     tabletUnitsVar.errors">
+
+                        <span *ngIf="tabletUnitsVar.errors.required">
+                            Unit type is required.
+                        </span>
                 </div>
             </div>
 

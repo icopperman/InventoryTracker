@@ -9,7 +9,7 @@
                                               tabletNameVar.dirty || tablet.tblIdx !== 0) && 
                                               !tabletNameVar.valid }">
                 <label class="col-md-2 control-label" 
-                        for="tabletNameId">tablet Name</label>
+                        for="tabletNameId">Tablet Name</label>
 
                 <div class="col-md-8">
                     <input class="form-control" 
@@ -45,7 +45,7 @@
                             id="tabletCampus" 
                             name="tabletCampus"
                            
-                            placeholder="Table name (required)"
+                            placeholder="Campus (required)"
                             required
                             [(ngModel)] = tablet.Campus
                             (ngModelChange)="campusChanged($event)"

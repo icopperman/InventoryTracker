@@ -47,16 +47,16 @@
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
                         </td>-->
-                        <td>{{ tablet.TabletName }}</td>
+                        <td><a [routerLink]="[tablet.id]" 
+                               [queryParams]="{filterBy: listFilter, showImage: showImage}">
+                            {{tablet.TabletName}}
+                            </a>
+                        </td>
                         <td>{{ tablet.Campus }}</td>
                         <td>{{ tablet.Unit }}</td>
                         <td>{{ tablet.Status }}</td>
                         <!--<td>
-                        <td><a [routerLink]="[tablet.id]" 
-                               [queryParams]="{filterBy: listFilter, showImage: showImage}">
-                            {{tablet.tabletName}}
-                            </a>
-                        </td>
+                        <td>{{ tablet.TabletName }}</td>
                             <ai-star [rating]="tablet.starRating">
                             </ai-star>
                        </td>-->

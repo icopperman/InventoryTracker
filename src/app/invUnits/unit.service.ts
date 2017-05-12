@@ -73,7 +73,15 @@ export class UnitService {
 
     private extractData(response: Response) {
         let body = response.json();
-        return body.Units || {};
+        let xx = body.Units;
+
+        if ( xx.length == 1) {
+            return xx[0];
+        }
+        else {
+            return xx || {};
+        }
+
     }
 
     private handleError(error: Response): Observable<any> {
@@ -86,14 +94,14 @@ export class UnitService {
     initializeUnit(): IUnit {
         // Return an initialized object
         return {
-            id: 0,
-            category: null,
-            tags: [],
-            releaseDate: null,
-            price: null,
-            description: null,
-            starRating: null,
-            imageUrl: null,
+            // id: 0,
+            // category: null,
+            // tags: [],
+            // releaseDate: null,
+            // price: null,
+            // description: null,
+            // starRating: null,
+            // imageUrl: null,
             active: null, 
             campus: null,
             campus1: null,
