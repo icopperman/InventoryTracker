@@ -1,28 +1,28 @@
 <div class="panel panel-primary" *ngIf="tablet">
     <div class="panel-heading" style="font-size:large">
-        {{pageTitle + ": " + tablet.tabletName}}
+        {{pageTitle + ": " + tablet.TabletName}}
     </div>
 
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-3">Name:</div>
-                    <div class="col-md-6">{{tablet.tabletName}}</div>
+                    <div class="col-md-3">Tablet Name</div>
+                    <div class="col-md-6">{{tablet.TabletName}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">Code:</div>
-                    <div class="col-md-6">{{tablet.tabletCode}}</div>
+                    <div class="col-md-3">Campus</div>
+                    <div class="col-md-6">{{tablet.Campus}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">Description:</div>
-                    <div class="col-md-6">{{tablet.description}}</div>
+                    <div class="col-md-3">Unit</div>
+                    <div class="col-md-6">{{tablet.Unit}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">Availability:</div>
-                    <div class="col-md-6">{{tablet.releaseDate}}</div>
+                    <div class="col-md-3">Status</div>
+                    <div class="col-md-6">{{tablet.Status}}</div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-md-3">Price:</div>
                     <div class="col-md-6">{{tablet.price|currency:"USD":true}}</div>
                 </div>
@@ -40,16 +40,16 @@
                 <div class="row">
                     <div class="col-md-3">Tags:</div>
                     <div class="col-md-6">{{tablet.tags}}</div>
-                </div>
+                </div>-->
             </div>
 
-            <div class="col-md-6" *ngIf="tablet.imageUrl">
+            <!--<div class="col-md-6" *ngIf="tablet.imageUrl">
                 <img class="center-block img-responsive" 
                      [style.width.px]="200" 
                      [style.margin.px]="2" 
                      [src]="tablet.imageUrl"
                      [title]="tablet.tabletName">
-            </div>
+            </div>-->
         </div>
         <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
     </div>

@@ -15,7 +15,7 @@ export interface ITablet {
     // name: string;
     // site: string;
     // active: string;
-    createdDate: string;
+    createdDate?: string;
     
     Campus: string;
     Status: string;

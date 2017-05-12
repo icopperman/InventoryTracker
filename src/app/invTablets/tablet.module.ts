@@ -5,7 +5,8 @@ import { TabletListComponent } from './tablet-list.component';
 import { TabletDetailComponent } from './tablet-detail.component';
 import { TabletEditComponent } from './tablet-edit.component';
 import { TabletEditInfoComponent } from './tablet-edit-info.component';
-//import { TabletEditTagsComponent } from './tablet-edit-tags.component';
+import { TabletEditTagsComponent } from './tablet-edit-tags.component';
+import { UnitService } from '../invUnits/unit.service';
 
 import { TabletService } from './tablet.service';
 import { TabletResolver } from './tablet-resolver.service';
@@ -23,22 +24,22 @@ import { SharedModule } from '../shared/shared.module';
       {
         path: '',
         component: TabletListComponent,
-        resolve: { email: TabletResolver },
+        //resolve: { tablets: TabletResolver },
         data: { origin: "from :'', tabletListcomponent", idx: 0}
 
       },
       {
         path: ':id',
         component: TabletDetailComponent,
-        data: { origin: "from :'id', tabletListcomponent", idx: 0},
+        data: { origin: "from :'id', tabletDetailcomponent", idx: 1},
         resolve: { tablet: TabletResolver }
       },
       {
         path: ':id/edit',
         component: TabletEditComponent,
-        resolve: { tablets: TabletResolver,
+        resolve: { tablet: TabletResolver,
                    units: TabletUnitsResolver   },
-        data: { origin: "from :'id/edit', tabletListcomponent", idx: 0},
+        data: { origin: "from :'id/edit', tabletEditcomponent", idx: 2},
         canDeactivate: [TabletEditGuard],
         children: [
           {
@@ -63,14 +64,14 @@ import { SharedModule } from '../shared/shared.module';
     TabletDetailComponent,
     TabletEditComponent,
     TabletEditInfoComponent,
-    //TabletEditTagsComponent,
+    TabletEditTagsComponent,
     TabletFilterPipe
   ],
   providers: [
     TabletService,
     TabletResolver,
     TabletUnitsResolver,
-
+    UnitService,
     TabletEditGuard
   ]
 })

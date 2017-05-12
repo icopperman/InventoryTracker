@@ -43,8 +43,7 @@
                 <div class="col-md-8">
                     <select class="form-control" 
                             id="emailCampus" 
-                            type="text" 
-                            placeholder="Campus (required)"
+                             placeholder="Campus (required)"
                             required
                             [(ngModel)] = email.Campus
                             (ngModelChange)="campusChanged($event)"
@@ -82,17 +81,16 @@
                             required
                             [(ngModel)]="email.Unit" 
                             (ngModelChange)="unitChanged($event)"
-
-                            #emailUnitsVar
+                            #tabletUnitsVar
                         >
                         <option *ngFor="let unit of units" [value]="unit.unitName" >{{unit.unitName}}</option>
                     </select>
 
-                            <span class="help-block" *ngIf="(emailUnitsVar.touched ||
-                                                     emailUnitsVar.dirty || email.tblIdx !== 0) &&
-                                                     emailUnitsVar.errors">
+                            <span class="help-block" *ngIf="(tabletUnitsVar.touched ||
+                                                     tabletUnitsVar.dirty || tablet.tblIdx !== 0) &&
+                                                     tabletUnitsVar.errors">
 
-                        <span *ngIf="emailUnitsVar.errors.required">
+                        <span *ngIf="tabletUnitsVar.errors.required">
                             Unit is required.
                         </span>
                     </span>

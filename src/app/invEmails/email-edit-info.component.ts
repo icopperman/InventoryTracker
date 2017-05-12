@@ -23,7 +23,6 @@ export class EmailEditInfoComponent implements OnInit {
 
     ngOnInit(): void {
 
-
         this.route.parent.data.subscribe(data => {
             
             this.email     = data['email'];
@@ -56,18 +55,9 @@ export class EmailEditInfoComponent implements OnInit {
     }
 
     campusChanged(value: any): void {
-
-        // let acampus = this.email.Campus;
-
-        // if (acampus.length > 1) {
-
-        //     acampus = (acampus == "East") ? "E" : "W";
-
-        // }
+       
         this.email.Campus = value;
-
         this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == value);
-
 
     }
 

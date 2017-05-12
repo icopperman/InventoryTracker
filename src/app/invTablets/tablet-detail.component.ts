@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ITablet } from './tablet';
+import {IUnit} from '../invUnits/unit';
 
 @Component({
     templateUrl: './app/invTablets/tablet-detail.component.html'
 })
 export class TabletDetailComponent implements OnInit {
-    pageTitle: string = 'Product Detail';
+    pageTitle: string = 'Tablet Detail';
     tablet: ITablet;
+     units: IUnit[];
     errorMessage: string;
 
     constructor(private route: ActivatedRoute) { }

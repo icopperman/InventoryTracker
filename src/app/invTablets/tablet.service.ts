@@ -49,14 +49,14 @@ export class TabletService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        if (tablet.id === 0) {
+        if (tablet.tblIdx === 0) {
             return this.createTablet(tablet, options);
         }
         return this.updateTablet(tablet, options);
     }
 
     private createTablet(tablet: ITablet, options: RequestOptions): Observable<ITablet> {
-        tablet.id = undefined;
+        tablet.tblIdx = undefined;
         return this.http.post(this.baseUrl, tablet, options)
             .map(this.extractData)
             .do(data => console.log('createtablet: ' + JSON.stringify(data)))
@@ -64,7 +64,7 @@ export class TabletService {
     }
 
     private updateTablet(tablet: ITablet, options: RequestOptions): Observable<ITablet> {
-        const url = `${this.baseUrl}/${tablet.id}`;
+        const url = `${this.baseUrl}/${tablet.tblIdx}`;
         return this.http.put(url, tablet, options)
             .map(() => tablet)
             .do(data => console.log('updateTablet: ' + JSON.stringify(data)))
@@ -73,7 +73,15 @@ export class TabletService {
 
     private extractData(response: Response) {
         let body = response.json();
-        return body.Tablets || {};
+         let xx = body.Tablets;
+
+        if ( xx.length == 1) {
+            return xx[0];
+        }
+        else {
+            return xx || {};
+        }
+        
     }
 
     private handleError(error: Response): Observable<any> {
@@ -86,26 +94,27 @@ export class TabletService {
     initializeTablet(): ITablet {
         // Return an initialized object
         return {
-            id: 0,
-            category: null,
-            tags: [],
-            releaseDate: null,
-            price: null,
-            description: null,
-            starRating: null,
-            imageUrl: null,
-            active: null, 
-            campus1: null,
-            createdDate: null,
-            name: null,
-            site: null,
-            tabletCode: null,
+            // id: 0,
+            // category: null,
+            // tags: [],
+            // releaseDate: null,
+            // price: null,
+            // description: null,
+            // starRating: null,
+            // imageUrl: null,
+            // active: null, 
+            // campus1: null,
+            // createdDate: null,
+            // name: null,
+            // site: null,
+            // tabletCode: null,
             
             Campus: null,
             tblIdx: 0,
             TabletName: null,
             Unit: null, 
             Status: null,
+            selectedUnit: null
 
         };
     }

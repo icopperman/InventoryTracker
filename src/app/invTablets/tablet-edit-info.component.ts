@@ -17,6 +17,7 @@ export class TabletEditInfoComponent implements OnInit {
     units: IUnit[];
     selectedUnit: string;
     ccs: string[];
+    statuses: string[];
     origUnits: IUnit[];
 
     constructor(private route: ActivatedRoute) { }
@@ -24,10 +25,9 @@ export class TabletEditInfoComponent implements OnInit {
     ngOnInit(): void {
         this.route.parent.data.subscribe(data => {
             this.tablet = data['tablet'];
-            
             this.origUnits = data['units'];
             this.ccs       = ["East", "West"];
-            
+            this.statuses  =["Unassigned", "Assigned"]
             this.origUnits = _.map(this.origUnits, (aunit: IUnit) => {
 
                 aunit.campus = (aunit.campus == "E") ? "East" : "West";
@@ -50,5 +50,22 @@ export class TabletEditInfoComponent implements OnInit {
                 this.tabletForm.reset();
             }
         });
+    }
+
+     campusChanged(value: any): void {
+   
+        this.tablet.Campus = value;
+        this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == value);
+    }
+
+    unitChanged(value: any): void {
+
+        this.tablet.Unit = value;
+    }
+
+    statusChanged(value: any): void {
+
+        this.tablet.Status = value;
+
     }
 }

@@ -5,9 +5,9 @@ import { EmailListComponent } from './email-list.component';
 import { EmailDetailComponent } from './email-detail.component';
 import { EmailEditComponent } from './email-edit.component';
 import { EmailEditInfoComponent } from './email-edit-info.component';
-//import { EmailEditTagsComponent } from './email-edit-tags.component';
+import { EmailEditTagsComponent } from './email-edit-tags.component';
 
-//import { UnitService } from '../invUnits/unit.service';
+import { UnitService } from '../invUnits/unit.service';
 import { EmailService } from './email.service';
 import { EmailResolver } from './email-resolver.service';
 import { EmailUnitsResolver} from './email-units-resolver.service';
@@ -65,7 +65,7 @@ import { SharedModule } from '../shared/shared.module';
     EmailDetailComponent,
     EmailEditComponent,
     EmailEditInfoComponent,
-    //EmailEditTagsComponent,
+    EmailEditTagsComponent,
     EmailFilterPipe
   ],
   providers: [
@@ -73,7 +73,7 @@ import { SharedModule } from '../shared/shared.module';
     EmailEditGuard,
     EmailResolver,
     EmailUnitsResolver,
-   // UnitService
+    UnitService
   ]
 })
 export class EmailModule { }
