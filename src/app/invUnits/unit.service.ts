@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
-
+import * as _ from 'lodash';
 import { IUnit } from './unit';
 
 @Injectable()
@@ -49,14 +49,14 @@ export class UnitService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        if (unit.id === 0) {
+        if (unit.idUnit === 0) {
             return this.createUnit(unit, options);
         }
         return this.updateUnit(unit, options);
     }
 
     private createUnit(unit: IUnit, options: RequestOptions): Observable<IUnit> {
-        unit.id = undefined;
+        unit.idUnit = undefined;
         return this.http.post(this.baseUrl, unit, options)
             .map(this.extractData)
             .do(data => console.log('createunit: ' + JSON.stringify(data)))
@@ -64,7 +64,7 @@ export class UnitService {
     }
 
     private updateUnit(unit: IUnit, options: RequestOptions): Observable<IUnit> {
-        const url = `${this.baseUrl}/${unit.id}`;
+        const url = `${this.baseUrl}/${unit.idUnit}`;
         return this.http.put(url, unit, options)
             .map(() => unit)
             .do(data => console.log('updateUnit: ' + JSON.stringify(data)))
@@ -74,7 +74,19 @@ export class UnitService {
     private extractData(response: Response) {
         let body = response.json();
         let xx = body.Units;
+        xx = _.map(body.Units, (aunit: IUnit) => {
 
+            switch (aunit.active) {
+
+                    case "0" : aunit.type = 'inactive'; break;
+                    case "1" : aunit.type = 'Clinical 1'; break;
+                    case "2" : aunit.type = 'Clinical 2'; break;
+                    case "3" : aunit.type = 'Non-Clinical'; break;
+
+
+            }
+            return aunit;
+        })
         if ( xx.length == 1) {
             return xx[0];
         }
@@ -110,7 +122,8 @@ export class UnitService {
             site: null,
             unitName: null,
             unitCode: null,
-            createdDate: null
+            createdDate: null,
+            type: null
 
         };
     }

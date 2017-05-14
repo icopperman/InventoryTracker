@@ -15,7 +15,7 @@ export class UnitEditInfoComponent implements OnInit {
     errorMessage: string;
     unit: IUnit;
     ccs: string[];
-    actives: string[];
+    types: string[];
 
     constructor(private route: ActivatedRoute) { }
 
@@ -23,7 +23,7 @@ export class UnitEditInfoComponent implements OnInit {
         this.route.parent.data.subscribe(data => {
             this.unit = data['unit'];
             this.ccs       = ["East", "West"];
-            this.actives  =["Clinical 1", "Clinical 2", "Non-clinical"];
+            this.types  =["Clinical 1", "Clinical 2", "Non-Clinical"];
             let acampus = this.unit.campus;
 
             if (acampus.length == 1) {

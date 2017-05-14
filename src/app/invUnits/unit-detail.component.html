@@ -11,14 +11,14 @@
                     <div class="col-md-6">{{unit.unitName}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">Code:</div>
-                    <div class="col-md-6">{{unit.unitCode}}</div>
+                    <div class="col-md-3">Campus</div>
+                    <div class="col-md-6">{{unit.campus}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">Description:</div>
-                    <div class="col-md-6">{{unit.description}}</div>
+                    <div class="col-md-3">Type</div>
+                    <div class="col-md-6">{{unit.type}}</div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-md-3">Availability:</div>
                     <div class="col-md-6">{{unit.releaseDate}}</div>
                 </div>
@@ -41,15 +41,15 @@
                     <div class="col-md-3">Tags:</div>
                     <div class="col-md-6">{{unit.tags}}</div>
                 </div>
-            </div>
-
+            </div>-->
+<!--
             <div class="col-md-6" *ngIf="unit.imageUrl">
                 <img class="center-block img-responsive" 
                      [style.width.px]="200" 
                      [style.margin.px]="2" 
                      [src]="unit.imageUrl"
                      [title]="unit.unitName">
-            </div>
+            </div>-->
         </div>
         <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
     </div>

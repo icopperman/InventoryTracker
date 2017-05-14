@@ -46,21 +46,21 @@
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
                         </td>-->
-                        <td><a [routerLink]="[unit.id]" 
+                        <td><a [routerLink]="[unit.idUnit]" 
                                [queryParams]="{filterBy: listFilter, showImage: showImage}">
                             {{unit.unitName}}
                             </a>
                         </td>
                         <td>{{ unit.campus }}</td>
-                        <!--<td>{{ unit.releaseDate }}</td>
-                        <td>{{ unit.price | currency:"USD":true:"1.2-2" }}</td>
+                        <td>{{ unit.type }}</td>
+                        <!--<td>{{ unit.price | currency:"USD":true:"1.2-2" }}</td>
                         <td>
                             <ai-star [rating]="unit.starRating">
                             </ai-star>
                        </td>-->
                        <td>
                             <a class="btn btn-primary" 
-                               [routerLink]="[unit.id, 'edit']">
+                               [routerLink]="[unit.idUnit, 'edit']">
                                 Edit
                             </a>
                         </td>

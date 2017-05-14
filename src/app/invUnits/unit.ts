@@ -18,4 +18,5 @@ export interface IUnit {
     campus: string;
     active: string;
     createdDate: string;
+    type: string;
 }

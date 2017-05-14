@@ -19,7 +19,7 @@ export class TabletResolver implements Resolve<ITablet> {
         state: RouterStateSnapshot): Observable<ITablet> {
 
         // let id = route.paramMap.get('id');
-        let xx = route.data;
+        let xx: any = route.data;
 
         switch (xx.idx) {
             case 0:

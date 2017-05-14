@@ -20,6 +20,7 @@ export class UnitResolver implements Resolve<IUnit> {
 
         let id = route.params['id'];
         // let id = route.paramMap.get('id');
+        let xx : any = route.data;
 
         switch (xx.idx) {
             case 0:
@@ -29,7 +30,6 @@ export class UnitResolver implements Resolve<IUnit> {
             case 1:
             case 2:
 
-                let xx = route.data;
         if (isNaN(+id)) {
             console.log(`Unit id was not a number: ${id}`);
             this.router.navigate(['/units']);

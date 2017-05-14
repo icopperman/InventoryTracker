@@ -45,7 +45,7 @@ export class UnitEditComponent implements OnInit {
     }
 
     onUnitRetrieved(data: any): void {
-        this.unit = data['units'];
+        this.unit = data['unit'];
 
         // Adjust the title
         if (this.unit.idUnit === 0) {
@@ -120,7 +120,7 @@ export class UnitEditComponent implements OnInit {
 
         // 'info' tab
         if (this.unit.unitName &&
-            this.unit.unitName.length >= 3 &&
+            this.unit.unitName.length >= 2 &&
             this.unit.campus) {
             this.dataIsValid['info'] = true;
         } else {
