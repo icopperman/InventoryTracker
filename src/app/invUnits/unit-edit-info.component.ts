@@ -38,4 +38,15 @@ export class UnitEditInfoComponent implements OnInit {
             }
         });
     }
+
+    campusChanged(value: any): void {
+   
+        this.unit.campus = value;
+        //this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == value);
+    }
+
+    typeChanged(value: any): void {
+
+        this.unit.type = value;
+    }
 }
