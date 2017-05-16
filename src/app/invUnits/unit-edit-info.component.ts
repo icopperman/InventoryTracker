@@ -16,6 +16,7 @@ export class UnitEditInfoComponent implements OnInit {
     unit: IUnit;
     ccs: string[];
     types: string[];
+    sites: string[];
 
     constructor(private route: ActivatedRoute) { }
 
@@ -24,9 +25,11 @@ export class UnitEditInfoComponent implements OnInit {
             this.unit = data['unit'];
             this.ccs       = ["East", "West"];
             this.types  =["Clinical 1", "Clinical 2", "Non-Clinical"];
+            this.sites = ['Allen','Heart Center','Cornell','Columbia','Milstein','Lower Manhattan']
+
             let acampus = this.unit.campus;
 
-            if (acampus.length == 1) {
+            if ( ( _.isEmpty(acampus) == false ) && (acampus.length == 1) ) {
 
                 acampus = (acampus == "E") ? "East" : "West";
             }
@@ -47,6 +50,6 @@ export class UnitEditInfoComponent implements OnInit {
 
     typeChanged(value: any): void {
 
-        this.unit.type = value;
+        this.unit.unitType = value;
     }
 }

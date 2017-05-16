@@ -8,54 +8,52 @@
                 <label class="col-md-2 control-label" for="unitNameId">Unit Name</label>
 
                 <div class="col-md-8">
-                    <input class="form-control" id="unitNameId" type="text" 
-                    placeholder="Name (required)" required minlength="2" [(ngModel)]=unit.unitName name="unitName" #unitNameVar="ngModel" />
+                    <input class="form-control" id="unitNameId" type="text" placeholder="Name (required)" required minlength="2" [(ngModel)]=unit.unitName
+                        name="unitName" #unitNameVar="ngModel" />
                     <span class="help-block" *ngIf="(unitNameVar.touched ||
                                                      unitNameVar.dirty || unit.idUnit !== 0) &&
                                                      unitNameVar.errors">
                         <span *ngIf="unitNameVar.errors.required">
                             Unit name is required.
                         </span>
-                        <span *ngIf="unitNameVar.errors.minlength">
+                    <span *ngIf="unitNameVar.errors.minlength">
                             Unit name must be at least three characters.
                         </span>
-                        </span>
+                    </span>
                 </div>
-</div>
+            </div>
 
 
-<div class="form-group" [ngClass]="{'has-error': (unitCodeVar.touched || 
+            <div class="form-group" [ngClass]="{'has-error': (unitCodeVar.touched || 
                                               unitCodeVar.dirty || unit.idUnit !== 0) && 
                                               !unitCodeVar.valid }">
-    <label class="col-md-2 control-label" for="unitCodeId">Unit Campus</label>
+                <label class="col-md-2 control-label" for="unitCodeId">Unit Campus</label>
 
-    <div class="col-md-8">
-        <select class="form-control" id="unitCodeId" name="unitCodeId" 
-        placeholder="Campus (required)" required
-         [(ngModel)]=unit.campus
-            (ngModelChange)="campusChanged($event)" #unitCodeVar="ngModel">
+                <div class="col-md-8">
+                    <select class="form-control" id="unitCodeId" name="unitCodeId" placeholder="Campus (required)" 
+                    required [(ngModel)]=unit.campus
+                        (ngModelChange)="campusChanged($event)" #unitCodeVar="ngModel">
             <option *ngFor="let c of ccs" [value]="c">{{c}}</option>
             </select>
-            <span class="help-block" *ngIf="(unitCodeVar.touched ||
+                    <span class="help-block" *ngIf="(unitCodeVar.touched ||
                                                      unitCodeVar.dirty || unit.idUnit !== 0) &&
                                                      unitCodeVar.errors">
                 <span *ngIf="unitCodeVar.errors.required">
                             Campus is required.
                         </span>
-                </span>
-    </div>
-    </div>
+                    </span>
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="descriptionId">Type</label>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="descriptionId">Type</label>
 
-        <div class="col-md-8">
-            <select class="form-control" id="descriptionId" 
-            name="descriptionId" placeholder="Select a Unit Type" required [(ngModel)]="unit.type"
-                (ngModelChange)="typeChanged($event)" #tabletUnitsVar e>
+                <div class="col-md-8">
+                    <select class="form-control" id="descriptionId" name="descriptionId" placeholder="Select a Unit Type" required [(ngModel)]="unit.type"
+                        (ngModelChange)="typeChanged($event)" #tabletUnitsVar e>
                 <option *ngFor="let t of types" [value]="t">{{t}}</option>
                 </select>
-                <span class="help-block" *ngIf="(tabletUnitsVar.touched ||
+                    <span class="help-block" *ngIf="(tabletUnitsVar.touched ||
                                                      tabletUnitsVar.dirty || unit.idUnit !== 0) &&
                                                      tabletUnitsVar.errors">
 
@@ -63,10 +61,10 @@
                             Unit type is required.
                         </span>
                     </span>
-        </div>
-    </div>
+                </div>
+            </div>
 
-    <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
-    </fieldset>
+            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+        </fieldset>
     </form>
-    </div>
+</div>

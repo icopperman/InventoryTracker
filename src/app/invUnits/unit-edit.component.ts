@@ -26,8 +26,15 @@ export class UnitEditComponent implements OnInit {
         return this.currentUnit
     }
     set unit(value: IUnit) {
+        
         this.currentUnit = value;
-                this.currentUnit.campus = (this.currentUnit.campus == "E" ) ? "East" : "West";
+        
+        if ( _.isEmpty(this.currentUnit.campus) == false) {
+
+            this.currentUnit.campus = (this.currentUnit.campus == "E" ) ? "East" : "West";
+        
+        }
+        
         // Clone the object to retain a copy
         this.originalUnit = Object.assign({}, value);
     }

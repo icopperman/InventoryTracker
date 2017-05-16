@@ -13,14 +13,15 @@ import { IUnit } from './unit';
 @Injectable()
 export class UnitService {
     
-    private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/units';
+    //private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/units';
+    private baseUrl = 'http://localhost:58087/units';
 
     constructor(private http: Http) { }
 
     getUnits(): Observable<IUnit[]> {
         return this.http.get(this.baseUrl)
             .map(this.extractData)
-            .do(data => console.log('getUnits: ' + JSON.stringify(data)))
+            .do(data => console.log('getUnits: ')) // + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
@@ -31,7 +32,7 @@ export class UnitService {
         const url = `${this.baseUrl}/${id}`;
         return this.http.get(url)
             .map(this.extractData)
-            .do(data => console.log('getUnit: ' + JSON.stringify(data)))
+            .do(data => console.log('getUnit: '))// + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
@@ -56,15 +57,18 @@ export class UnitService {
     }
 
     private createUnit(unit: IUnit, options: RequestOptions): Observable<IUnit> {
+        
         unit.idUnit = undefined;
-        return this.http.post(this.baseUrl, unit, options)
+        const url = `${this.baseUrl}/add`;
+
+        return this.http.post(url, unit, options)
             .map(this.extractData)
             .do(data => console.log('createunit: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
     private updateUnit(unit: IUnit, options: RequestOptions): Observable<IUnit> {
-        const url = `${this.baseUrl}/${unit.idUnit}`;
+        const url = `${this.baseUrl}/${unit.idUnit}/update`;
         return this.http.put(url, unit, options)
             .map(() => unit)
             .do(data => console.log('updateUnit: ' + JSON.stringify(data)))
@@ -74,19 +78,7 @@ export class UnitService {
     private extractData(response: Response) {
         let body = response.json();
         let xx = body.Units;
-        xx = _.map(body.Units, (aunit: IUnit) => {
-
-            switch (aunit.active) {
-
-                    case "0" : aunit.type = 'inactive'; break;
-                    case "1" : aunit.type = 'Clinical 1'; break;
-                    case "2" : aunit.type = 'Clinical 2'; break;
-                    case "3" : aunit.type = 'Non-Clinical'; break;
-
-
-            }
-            return aunit;
-        })
+        
         if ( xx.length == 1) {
             return xx[0];
         }
@@ -114,16 +106,16 @@ export class UnitService {
             // description: null,
             // starRating: null,
             // imageUrl: null,
-            active: null, 
-            campus: null,
-            campus1: null,
+            // campus1: null,
+            // active: null, 
+            // name: null,
+            // site: null,
+            // createdDate: null,
+            // unitCode: null,
             idUnit: 0,
-            name: null,
-            site: null,
+            campus: null,
             unitName: null,
-            unitCode: null,
-            createdDate: null,
-            type: null
+            unitType: null
 
         };
     }
