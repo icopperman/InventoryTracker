@@ -49,7 +49,8 @@
                 <label class="col-md-2 control-label" for="descriptionId">Type</label>
 
                 <div class="col-md-8">
-                    <select class="form-control" id="descriptionId" name="descriptionId" placeholder="Select a Unit Type" required [(ngModel)]="unit.type"
+                    <select class="form-control" id="descriptionId" name="descriptionId" placeholder="Select a Unit Type" 
+                    required [(ngModel)]="unit.unitType"
                         (ngModelChange)="typeChanged($event)" #tabletUnitsVar e>
                 <option *ngFor="let t of types" [value]="t">{{t}}</option>
                 </select>

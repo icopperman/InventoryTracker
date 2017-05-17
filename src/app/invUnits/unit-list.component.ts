@@ -33,12 +33,9 @@ export class UnitListComponent implements OnInit {
         // console.log(this.route.snapshot.queryParamMap.get('filterBy'));            
 
         this.unitService.getUnits()
-            .subscribe(units => {
-                this.units = _.map(units, (aunit: IUnit) => {
-                    aunit.campus = (aunit.campus == 'E') ? "East" : "West";
-                    return aunit;
-                })
-            },
-            error => this.errorMessage = <any>error);
+            .subscribe(
+                units => this.units = units,
+                error => this.errorMessage = <any>error
+            );
     }
 }

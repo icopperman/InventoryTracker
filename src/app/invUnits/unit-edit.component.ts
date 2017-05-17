@@ -29,12 +29,6 @@ export class UnitEditComponent implements OnInit {
         
         this.currentUnit = value;
         
-        if ( _.isEmpty(this.currentUnit.campus) == false) {
-
-            this.currentUnit.campus = (this.currentUnit.campus == "E" ) ? "East" : "West";
-        
-        }
-        
         // Clone the object to retain a copy
         this.originalUnit = Object.assign({}, value);
     }
@@ -88,12 +82,7 @@ export class UnitEditComponent implements OnInit {
 
     saveUnit(): void {
         if (this.isValid(null)) {
-            if ( this.unit.campus.length > 1 ) {
-
-                this.unit.campus = (this.unit.campus == "East") ? "E" : "W";
-
-            }
-
+      
             this.unitService.saveUnit(this.unit)
                 .subscribe(
                     () => this.onSaveComplete(`${this.unit.unitName} was saved`),

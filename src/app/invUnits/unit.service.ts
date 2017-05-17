@@ -19,6 +19,10 @@ export class UnitService {
     constructor(private http: Http) { }
 
     getUnits(): Observable<IUnit[]> {
+        
+        const url = this.baseUrl;
+        console.log('get, getUnits: ' + url);
+
         return this.http.get(this.baseUrl)
             .map(this.extractData)
             .do(data => console.log('getUnits: ')) // + JSON.stringify(data)))
@@ -26,10 +30,14 @@ export class UnitService {
     }
 
     getUnit(id: number): Observable<IUnit> {
+        
         if (id === 0) {
             return Observable.of(this.initializeUnit());
         };
+        
         const url = `${this.baseUrl}/${id}`;
+        console.log('get, getUnit: ' + url);
+
         return this.http.get(url)
             .map(this.extractData)
             .do(data => console.log('getUnit: '))// + JSON.stringify(data)))
@@ -37,22 +45,29 @@ export class UnitService {
     }
 
     deleteUnit(id: number): Observable<Response> {
+        
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
         const url = `${this.baseUrl}/${id}`;
+        console.log('delete, deleteUnit: ' + url);
+
         return this.http.delete(url, options)
             .do(data => console.log('deleteUnit: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
     saveUnit(unit: IUnit): Observable<IUnit> {
+
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
         if (unit.idUnit === 0) {
+
             return this.createUnit(unit, options);
+
         }
+
         return this.updateUnit(unit, options);
     }
 
@@ -60,25 +75,39 @@ export class UnitService {
         
         unit.idUnit = undefined;
         const url = `${this.baseUrl}/add`;
+        console.log('post, addUnit: ' + url);
 
         return this.http.post(url, unit, options)
             .map(this.extractData)
-            .do(data => console.log('createunit: ' + JSON.stringify(data)))
+            .do(data => console.log('createunit: '))// + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
     private updateUnit(unit: IUnit, options: RequestOptions): Observable<IUnit> {
+
         const url = `${this.baseUrl}/${unit.idUnit}/update`;
+        console.log('put, updateUnit: ' + url);
+
+        if ( unit.campus.length > 1 ) {
+            unit.campus = (unit.campus == "East") ? "E" : "W";
+        }
+
         return this.http.put(url, unit, options)
             .map(() => unit)
-            .do(data => console.log('updateUnit: ' + JSON.stringify(data)))
+            .do(data => console.log('updateUnit: '))// + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
     private extractData(response: Response) {
+
         let body = response.json();
         let xx = body.Units;
         
+        xx = _.map(xx, (aunit: IUnit) => {
+                    aunit.campus = (aunit.campus == 'E') ? "East" : "West";
+                    return aunit;
+                })
+           
         if ( xx.length == 1) {
             return xx[0];
         }

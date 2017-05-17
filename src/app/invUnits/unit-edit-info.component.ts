@@ -29,11 +29,6 @@ export class UnitEditInfoComponent implements OnInit {
 
             let acampus = this.unit.campus;
 
-            if ( ( _.isEmpty(acampus) == false ) && (acampus.length == 1) ) {
-
-                acampus = (acampus == "E") ? "East" : "West";
-            }
-
             this.unit.campus = acampus;
             
             if (this.unitForm) {
