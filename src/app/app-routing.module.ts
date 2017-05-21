@@ -43,7 +43,10 @@ import { PageNotFoundComponent } from './page-not-found.component';
             },
             { path: '', redirectTo: 'welcome', pathMatch: 'full' },
             { path: '**', component: PageNotFoundComponent }
-        ], { preloadingStrategy: SelectiveStrategy }) // , { enableTracing: true })
+
+        ], 
+        { preloadingStrategy: SelectiveStrategy }) 
+        // , { enableTracing: true })
     ],
     providers: [ SelectiveStrategy ],
     exports: [ RouterModule ]

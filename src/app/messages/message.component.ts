@@ -26,7 +26,7 @@ import { MessageService } from '../messages/message.service';
 })
 export class MessageComponent {
 
-    constructor(private messageService: MessageService,
+    constructor(public messageService: MessageService,
                 private router: Router) { }
 
     close(): void {

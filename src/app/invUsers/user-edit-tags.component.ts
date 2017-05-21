@@ -22,12 +22,12 @@ export class UserEditTagsComponent implements OnInit {
     // Add the defined tags
     addTags(): void {
         let tagArray = this.newTags.split(',');
-        this.user.tags = this.user.tags ? this.user.tags.concat(tagArray) : tagArray;
+        //this.user.tags = this.user.tags ? this.user.tags.concat(tagArray) : tagArray;
         this.newTags = '';
     }
 
     // Remove the tag from the array of tags.
     removeTag(idx: number): void {
-        this.user.tags.splice(idx, 1);
+        //this.user.tags.splice(idx, 1);
     }
 }

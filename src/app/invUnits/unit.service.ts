@@ -13,8 +13,8 @@ import { IUnit } from './unit';
 @Injectable()
 export class UnitService {
     
-    //private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/units';
-    private baseUrl = 'http://localhost:58087/units';
+    private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/units';
+    //private baseUrl = 'http://localhost:58087/units';
 
     constructor(private http: Http) { }
 
@@ -53,7 +53,7 @@ export class UnitService {
         console.log('delete, deleteUnit: ' + url);
 
         return this.http.delete(url, options)
-            .do(data => console.log('deleteUnit: ' + JSON.stringify(data)))
+            .do(data => console.log('deleteUnit: '))// + JSON.stringify(data)))
             .catch(this.handleError);
     }
 

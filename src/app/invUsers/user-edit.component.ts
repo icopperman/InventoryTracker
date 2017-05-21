@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { MessageService } from '../messages/message.service';
 
 import { IUser } from './user';
@@ -11,6 +13,7 @@ import { UserService } from './user.service';
     styleUrls: ['./app/invUsers/user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
+    
     pageTitle: string = 'User Edit';
     errorMessage: string;
 
@@ -39,30 +42,38 @@ export class UserEditComponent implements OnInit {
     ngOnInit(): void {
         // Watch for changes to the resolve data
         this.route.data.subscribe(data => {
-             this.onUserRetrieved(data['user']);
+             this.onUserRetrieved(data);
         });
     }
 
-    onUserRetrieved(user: IUser): void {
-        this.user = user;
+    onUserRetrieved(data: any): void {
+        
+        this.user = data['user'];
 
         // Adjust the title
-        if (this.user.id === 0) {
+        if (this.user.idUser === 0) {
+
             this.pageTitle = 'Add User';
+
         } else {
-            this.pageTitle = `Edit User: ${this.user.userName}`;
+
+            this.pageTitle = `Edit User: ${this.user.userCwid}`;
+            
         }
     }
 
     deleteUser(): void {
-        if (this.user.id === 0) {
+        
+        if (this.user.idUser=== 0) {
             // Don't delete, it was never saved.
-            this.onSaveComplete(`${this.user.userName} was deleted`);
+            this.onSaveComplete(`${this.user.userCwid} was deleted`);
+
         } else {
-            if (confirm(`Really delete the user: ${this.user.userName}?`)) {
-                this.userService.deleteUser(this.user.id)
+            if (confirm(`Really delete the user: ${this.user.userCwid}?`)) {
+            
+                this.userService.deleteUser(this.user.idUser)
                     .subscribe(
-                        () => this.onSaveComplete(`${this.user.userName} was deleted`),
+                        () => this.onSaveComplete(`${this.user.userCwid} was deleted`),
                         (error: any) => this.errorMessage = <any>error
                     );
             }
@@ -70,19 +81,24 @@ export class UserEditComponent implements OnInit {
     }
 
     isValid(path: string): boolean {
+
         this.validate();
+        
         if (path) {
             return this.dataIsValid[path];
         }
+        
         return (this.dataIsValid &&
             Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
     }
 
     saveUser(): void {
+        
         if (this.isValid(null)) {
+
             this.userService.saveUser(this.user)
                 .subscribe(
-                    () => this.onSaveComplete(`${this.user.userName} was saved`),
+                    () => this.onSaveComplete(`${this.user.userCwid} was saved`),
                     (error: any) => this.errorMessage = <any>error
                 );
         } else {
@@ -91,9 +107,11 @@ export class UserEditComponent implements OnInit {
     }
 
     onSaveComplete(message?: string): void {
+        
         if (message) {
             this.messageService.addMessage(message);
         }
+        
         this.reset();
         // Navigate back to the product list
         this.router.navigate(['/users']);
@@ -112,20 +130,20 @@ export class UserEditComponent implements OnInit {
         this.dataIsValid = {};
 
         // 'info' tab
-        if (this.user.userName &&
-            this.user.userName.length >= 3 &&
-            this.user.userCode) {
+        if (this.user.userCwid &&
+            this.user.userCwid.length >= 3 &&
+            this.user.preferredCampus) {
             this.dataIsValid['info'] = true;
         } else {
             this.dataIsValid['info'] = false;
         }
 
         // 'tags' tab
-        if (this.user.category &&
-            this.user.category.length >= 3) {
-            this.dataIsValid['tags'] = true;
-        } else {
-            this.dataIsValid['tags'] = false;
-        }
+        // if (this.user.category &&
+        //     this.user.category.length >= 3) {
+        //     this.dataIsValid['tags'] = true;
+        // } else {
+        //     this.dataIsValid['tags'] = false;
+        // }
     }
 }

@@ -7,8 +7,10 @@ import { IUser } from './user';
 export class UserFilterPipe implements PipeTransform {
 
     transform(value: IUser[], filterBy: string): IUser[] {
+
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
+        
         return filterBy ? value.filter((user: IUser) =>
-            user.userName.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+            user.userCwid.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
     }
 }

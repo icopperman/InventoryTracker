@@ -13,30 +13,43 @@ import { UserService } from './user.service';
 export class UserResolver implements Resolve<IUser> {
 
     constructor(private userService: UserService,
-                private router: Router) { }
+        private router: Router) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<IUser> {
+        state: RouterStateSnapshot): Observable<IUser> {
+
         let id = route.params['id'];
         // let id = route.paramMap.get('id');
-        if (isNaN(+id)) {
-            console.log(`User id was not a number: ${id}`);
-            this.router.navigate(['/users']);
-            return Observable.of(null);
-        }
-        return this.userService.getUser(+id)
-            .map(user => {
-                if (user) {
-                    return user;
+        let xx: any = route.data;
+
+        switch (xx.idx) {
+            case 0:
+                console.log(xx.origin);
+                break;
+
+            case 1:
+            case 2:
+
+
+                if (isNaN(+id)) {
+                    console.log(`User id was not a number: ${id}`);
+                    this.router.navigate(['/users']);
+                    return Observable.of(null);
                 }
-                console.log(`User was not found: ${id}`);
-                this.router.navigate(['/users']);
-                return null;
-            })
-            .catch(error => {
-                console.log(`Retrieval error: ${error}`);
-                this.router.navigate(['/products']);
-                return Observable.of(null);
-            });
+                return this.userService.getUser(+id)
+                    .map(user => {
+                        if (user) {
+                            return user;
+                        }
+                        console.log(`User was not found: ${id}`);
+                        this.router.navigate(['/users']);
+                        return null;
+                    })
+                    .catch(error => {
+                        console.log(`Retrieval error: ${error}`);
+                        this.router.navigate(['/products']);
+                        return Observable.of(null);
+                    });
+        }
     }
 }

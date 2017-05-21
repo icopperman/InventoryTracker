@@ -24,43 +24,41 @@
                    *ngIf="users && users.length">
                 <thead>
                     <tr>
-                        <th>
+                        <!--<th>
                             <button class="btn btn-primary"
                                 (click)="toggleImage()">
                                 {{showImage ? "Hide" : "Show"}} Image
                             </button>
-                        </th>
-                        <th>Product</th>
-                        <th>Code</th>
-                        <th>Available</th>
-                        <th>Price</th>
-                        <th>5 Star Rating</th>
+                        </th>-->
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Campus</th>
+                        <th>Unit</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of users | userFilter:listFilter">
-                        <td>
+                        <!--<td>
                             <img *ngIf="showImage && user.imageUrl"
                                  [src]="user.imageUrl"
                                  [title]="user.userName | uppercase"
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
-                        </td>
-                        <td><a [routerLink]="[user.id]" 
-                               [queryParams]="{filterBy: listFilter, showImage: showImage}">
-                            {{user.userName}}
+                        </td>-->
+                        <td><a [routerLink]="[user.idUser]" 
+                               [queryParams]="{filterBy: listFilter}">
+                            {{user.userCwid}}
                             </a>
                         </td>
-                        <td>{{ user.userCode | lowercase }}</td>
-                        <td>{{ user.releaseDate }}</td>
-                        <td>{{ user.price | currency:"USD":true:"1.2-2" }}</td>
-                        <td>
-                            <ai-star [rating]="user.starRating">
-                            </ai-star>
+                        <td>{{ user.firstName + " " + user.lastName  }}</td>
+                        <td>{{ user.preferredCampus }}</td>
+                        <td>{{ user.preferredUnit }}</td>
+                        <td>{{ user.isAdmin }}                            
                        </td>
                        <td>
                             <a class="btn btn-primary" 
-                               [routerLink]="[user.id, 'edit']">
+                               [routerLink]="[user.idUser, 'edit']">
                                 Edit
                             </a>
                         </td>

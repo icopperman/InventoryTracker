@@ -22,6 +22,7 @@ export class AppComponent {
     }
 
     checkRouterEvent(routerEvent: Event): void {
+
         if (routerEvent instanceof NavigationStart) {
             this.loading = true;
         }
@@ -29,6 +30,7 @@ export class AppComponent {
         if (routerEvent instanceof NavigationEnd ||
             routerEvent instanceof NavigationCancel ||
             routerEvent instanceof NavigationError) {
+        
             this.loading = false;
         }
     }
@@ -42,11 +44,13 @@ export class AppComponent {
     }
 
     hideMessages(): void {
+
         this.router.navigate([{ outlets: { popup: null } }]);
         this.messageService.isDisplayed = false;
     }
 
     logOut(): void {
+
         this.authService.logout();
         this.router.navigateByUrl('/welcome');
     }

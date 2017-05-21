@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import * as _ from 'lodash';
+
 import { MessageService } from '../messages/message.service';
 
 import { IUnit } from './unit';
@@ -11,6 +13,7 @@ import { UnitService } from './unit.service';
     styleUrls: ['./app/invUnits/unit-edit.component.css']
 })
 export class UnitEditComponent implements OnInit {
+    
     pageTitle: string = 'Unit Edit';
     errorMessage: string;
 
@@ -46,22 +49,29 @@ export class UnitEditComponent implements OnInit {
     }
 
     onUnitRetrieved(data: any): void {
+       
         this.unit = data['unit'];
 
         // Adjust the title
         if (this.unit.idUnit === 0) {
+
             this.pageTitle = 'Add Unit';
+
         } else {
+            
             this.pageTitle = `Edit Unit: ${this.unit.unitName}`;
         }
     }
 
     deleteUnit(): void {
+
         if (this.unit.idUnit === 0) {
             // Don't delete, it was never saved.
             this.onSaveComplete(`${this.unit.unitName} was deleted`);
         } else {
+        
             if (confirm(`Really delete the unit: ${this.unit.unitName}?`)) {
+        
                 this.unitService.deleteUnit(this.unit.idUnit)
                     .subscribe(
                         () => this.onSaveComplete(`${this.unit.unitName} was deleted`),
@@ -72,15 +82,19 @@ export class UnitEditComponent implements OnInit {
     }
 
     isValid(path: string): boolean {
+
         this.validate();
+        
         if (path) {
             return this.dataIsValid[path];
         }
+
         return (this.dataIsValid &&
             Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
     }
 
     saveUnit(): void {
+
         if (this.isValid(null)) {
       
             this.unitService.saveUnit(this.unit)
@@ -94,9 +108,11 @@ export class UnitEditComponent implements OnInit {
     }
 
     onSaveComplete(message?: string): void {
+        
         if (message) {
             this.messageService.addMessage(message);
         }
+        
         this.reset();
         // Navigate back to the product list
         this.router.navigate(['/units']);

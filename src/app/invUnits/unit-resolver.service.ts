@@ -13,14 +13,14 @@ import { UnitService } from './unit.service';
 export class UnitResolver implements Resolve<IUnit> {
 
     constructor(private unitService: UnitService,
-                private router: Router) { }
+        private router: Router) { }
 
     resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Observable<IUnit> {
+        state: RouterStateSnapshot): Observable<IUnit> {
 
         let id = route.params['id'];
         // let id = route.paramMap.get('id');
-        let xx : any = route.data;
+        let xx: any = route.data;
 
         switch (xx.idx) {
             case 0:
@@ -30,25 +30,25 @@ export class UnitResolver implements Resolve<IUnit> {
             case 1:
             case 2:
 
-        if (isNaN(+id)) {
-            console.log(`Unit id was not a number: ${id}`);
-            this.router.navigate(['/units']);
-            return Observable.of(null);
-        }
-        return this.unitService.getUnit(+id)
-            .map(unit => {
-                if (unit) {
-                    return unit;
+                if (isNaN(+id)) {
+                    console.log(`Unit id was not a number: ${id}`);
+                    this.router.navigate(['/units']);
+                    return Observable.of(null);
                 }
-                console.log(`Unit was not found: ${id}`);
-                this.router.navigate(['/units']);
-                return null;
-            })
-            .catch(error => {
-                console.log(`Retrieval error: ${error}`);
-                this.router.navigate(['/units']);
-                return Observable.of(null);
-            });
+                return this.unitService.getUnit(+id)
+                    .map(unit => {
+                        if (unit) {
+                            return unit;
+                        }
+                        console.log(`Unit was not found: ${id}`);
+                        this.router.navigate(['/units']);
+                        return null;
+                    })
+                    .catch(error => {
+                        console.log(`Retrieval error: ${error}`);
+                        this.router.navigate(['/units']);
+                        return Observable.of(null);
+                    });
         }
     }
 }

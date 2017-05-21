@@ -7,13 +7,15 @@ import { IUnit } from './unit';
     templateUrl: './app/invUnits/unit-detail.component.html'
 })
 export class UnitDetailComponent implements OnInit {
-    pageTitle: string = 'Product Detail';
+    pageTitle: string = 'Unit Detail';
     unit: IUnit;
     errorMessage: string;
 
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit(): void {
+
         this.unit = this.route.snapshot.data['unit'];
+        
     }
 }

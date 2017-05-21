@@ -21,16 +21,19 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule.forChild([
       {
         path: '',
-        component: UserListComponent
+        component: UserListComponent,
+        data: { origin: "from :'', userListcomponent", idx: 0}
       },
       {
         path: ':id',
         component: UserDetailComponent,
+        data: { origin: "from :'', userDetailcomponent", idx: 1},
         resolve: { user: UserResolver }
       },
       {
         path: ':id/edit',
         component: UserEditComponent,
+        data: { origin: "from :'id/', userEditComponent", idx: 2},
         resolve: { user: UserResolver },
         canDeactivate: [UserEditGuard],
         children: [
@@ -42,11 +45,12 @@ import { SharedModule } from '../shared/shared.module';
           {
             path: 'info',
             component: UserEditInfoComponent
-          },
-          {
-            path: 'tags',
-            component: UserEditTagsComponent
           }
+          ,
+          // {
+          //   path: 'tags',
+          //   component: UserEditTagsComponent
+          // }
         ]
       }
     ])

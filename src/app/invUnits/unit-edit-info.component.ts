@@ -10,6 +10,7 @@ import { IUnit } from './unit';
     templateUrl: './app/invUnits/unit-edit-info.component.html'
 })
 export class UnitEditInfoComponent implements OnInit {
+    
     @ViewChild(NgForm) unitForm: NgForm;
 
     errorMessage: string;
@@ -22,7 +23,9 @@ export class UnitEditInfoComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.parent.data.subscribe(data => {
+            
             this.unit = data['unit'];
+            
             this.ccs       = ["East", "West"];
             this.types  =["Clinical 1", "Clinical 2", "Non-Clinical"];
             this.sites = ['Allen','Heart Center','Cornell','Columbia','Milstein','Lower Manhattan']
