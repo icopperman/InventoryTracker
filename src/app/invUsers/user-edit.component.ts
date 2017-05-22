@@ -102,14 +102,18 @@ export class UserEditComponent implements OnInit {
                     (error: any) => this.errorMessage = <any>error
                 );
         } else {
+
             this.errorMessage = 'Please correct the validation errors.';
+
         }
     }
 
     onSaveComplete(message?: string): void {
         
         if (message) {
+
             this.messageService.addMessage(message);
+            
         }
         
         this.reset();
