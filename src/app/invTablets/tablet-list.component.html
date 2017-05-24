@@ -47,8 +47,8 @@
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
                         </td>-->
-                        <td><a [routerLink]="[tablet.id]" 
-                               [queryParams]="{filterBy: listFilter, showImage: showImage}">
+                        <td><a [routerLink]="[tablet.tblIdx]" 
+                               [queryParams]="{filterBy: listFilter}">
                             {{tablet.TabletName}}
                             </a>
                         </td>

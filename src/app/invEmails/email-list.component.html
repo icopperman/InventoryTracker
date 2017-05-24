@@ -30,9 +30,9 @@
                                 {{showImage ? "Hide" : "Show"}} Image
                             </button>
                         </th>-->
+                        <th>Email</th>
                         <th>Campus</th>
                         <th>Unit Name</th>
-                        <th>Email</th>
                         <!--<th>Price</th>
                         <th>5 Star Rating</th>-->
                     </tr>
@@ -46,13 +46,13 @@
                                  [style.width.px]="imageWidth" 
                                  [style.margin.px]="imageMargin">
                         </td>-->
-                        <td>{{ email.Campus }}</td>
-                        <td>{{ email.Unit }}</td>
                         <td><a [routerLink]="[email.tblIdx]" 
-                               [queryParams]="{filterBy: listFilter, showImage: showImage}">
+                               [queryParams]="{filterBy: listFilter }">
                             {{email.EmailAddress}}
                             </a>
                         </td>
+                        <td>{{ email.Campus }}</td>
+                        <td>{{ email.Unit }}</td>
                         <!--<td>{{ email.emailAddress | lowercase }}</td>-->
                         <!--<td>
                             <ai-star [rating]="email.starRating">
