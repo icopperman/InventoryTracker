@@ -101,6 +101,7 @@ export class TabletEditComponent implements OnInit {
     }
 
     saveTablet(): void {
+
         if (this.isValid(null)) {
              
              if ( this.tablet.Campus.length > 1 ) {
@@ -120,6 +121,7 @@ export class TabletEditComponent implements OnInit {
     }
 
     onSaveComplete(message?: string): void {
+        
         if (message) {
             this.messageService.addMessage(message);
         }

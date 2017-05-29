@@ -15,8 +15,8 @@ import { IUser } from './user';
 @Injectable()
 export class UserService {
 
-    //private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/users';
-    private baseUrl = 'http://localhost:58087/users';
+    private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/users';
+    //private baseUrl = 'http://localhost:58087/users';
     
     constructor(private http: Http) { }
 

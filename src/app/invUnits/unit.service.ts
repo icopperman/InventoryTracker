@@ -13,7 +13,8 @@ import { IUnit } from './unit';
 @Injectable()
 export class UnitService {
     
-    private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/units';
+    private base = 'http://webdev.nyp.org/InventoryTrackerSvc/';
+    private baseUrl = this.base + 'units';
     //private baseUrl = 'http://localhost:58087/units';
 
     constructor(private http: Http) { }
@@ -76,11 +77,20 @@ export class UnitService {
         unit.idUnit = undefined;
         const url = `${this.baseUrl}/add`;
         console.log('post, addUnit: ' + url);
-
+        
         return this.http.post(url, unit, options)
             .map(this.extractData)
             .do(data => console.log('createunit: '))// + JSON.stringify(data)))
             .catch(this.handleError);
+
+        // const urll = `${this.base}login`;
+        // let auser = {UserName: 'irc9012', Password: 'Word19nyh'}
+        
+        // return this.http.post(urll, auser, options)
+        //     .map(this.extractData)
+        //     .do(data => console.log('createunit: '))// + JSON.stringify(data)))
+        //     .catch(this.handleError);
+
     }
 
     private updateUnit(unit: IUnit, options: RequestOptions): Observable<IUnit> {

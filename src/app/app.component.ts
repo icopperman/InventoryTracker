@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
+import { Router, Event, 
+    NavigationStart, NavigationEnd, NavigationError, NavigationCancel,
+    RoutesRecognized, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 import { AuthService } from './user/auth.service';
+import { UserLoginService } from "./user/user-login.service";
 import { MessageService } from './messages/message.service';
 
 @Component({
@@ -12,9 +15,12 @@ export class AppComponent {
     pageTitle: string = 'Tablet Inventory Management';
     loading: boolean = true;
 
-    constructor(private authService: AuthService,
+    constructor(
                 private messageService: MessageService,
-                private router: Router) {
+                private userLoginService: UserLoginService,
+                private router: Router
+                //private authService: AuthService,
+                ) {
 
         router.events.subscribe((routerEvent: Event) => {
             this.checkRouterEvent(routerEvent);
@@ -23,15 +29,42 @@ export class AppComponent {
 
     checkRouterEvent(routerEvent: Event): void {
 
+
         if (routerEvent instanceof NavigationStart) {
             this.loading = true;
+            console.log('navstart:' + this.loading)
         }
 
-        if (routerEvent instanceof NavigationEnd ||
-            routerEvent instanceof NavigationCancel ||
-            routerEvent instanceof NavigationError) {
+        if (routerEvent instanceof NavigationEnd ) {
+            this.loading = false;
+            console.log('navend:' + this.loading)
+        }
+
+        if ( routerEvent instanceof NavigationCancel ) 
+        { 
+            this.loading = false;
+            console.log('navcancel:' + this.loading)
+        } 
+
+        if ( routerEvent instanceof NavigationError) {
         
             this.loading = false;
+            console.log('naverrror:' + this.loading)
+        }
+        if ( routerEvent instanceof RoutesRecognized) {
+        
+            //this.loading = false;
+            console.log('routesRec:' + this.loading)
+        }
+        if ( routerEvent instanceof RouteConfigLoadStart) {
+        
+            //this.loading = false;
+            console.log('routesConfigLoadStart:' + this.loading)
+        }
+        if ( routerEvent instanceof RouteConfigLoadEnd) {
+        
+            //this.loading = false;
+            console.log('routesConfigLoadEnd:' + this.loading)
         }
     }
 
@@ -51,7 +84,7 @@ export class AppComponent {
 
     logOut(): void {
 
-        this.authService.logout();
+        this.userLoginService.logout();
         this.router.navigateByUrl('/welcome');
     }
 }

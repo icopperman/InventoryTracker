@@ -39,7 +39,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li *ngIf="authService.isLoggedIn()">
+                <li *ngIf="userLoginService.isLoggedIn()">
                     <a [routerLink]="['/login']">Welcome {{ authService.currentUser.userName }}</a>
                 </li>
                 <li *ngIf="!messageService.isDisplayed">
@@ -48,10 +48,10 @@
                 <li *ngIf="messageService.isDisplayed">
                     <a (click)="hideMessages()">Hide Messages</a>
                 </li>
-                <li *ngIf="!authService.isLoggedIn()">
+                <li *ngIf="!userLoginService.isLoggedIn()">
                     <a [routerLink]="['/login']">Log In</a>
                 </li>
-                <li *ngIf="authService.isLoggedIn()">
+                <li *ngIf="userLoginService.isLoggedIn()">
                     <a (click)="logOut()">Log Out</a>
                 </li>
             </ul>

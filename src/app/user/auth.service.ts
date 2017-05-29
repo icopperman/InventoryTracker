@@ -27,24 +27,24 @@ export class AuthService {
 
         if (userName === 'admin') {
         
-            this.currentUser = {
-                id: 1,
-                userName: userName,
-                isAdmin: true
-            };
+            // this.currentUser = {
+            //     id: 1,
+            //     userName: userName,
+            //     isAdmin: true
+            // };
 
             this.messageService.addMessage('Admin login');
             return;
 
         }
 
-        this.currentUser = {
-            id: 2,
-            userName: userName,
-            isAdmin: false
-        };
+        // this.currentUser = {
+        //     id: 2,
+        //     userName: userName,
+        //     isAdmin: false
+        // };
 
-        this.messageService.addMessage(`User: ${this.currentUser.userName} logged in`);
+        //this.messageService.addMessage(`User: ${this.currentUser.userName} logged in`);
 
     }
 

@@ -5,7 +5,7 @@
   "description": "Package inventory tracker",
   "scripts": {
     "build": "tsc ",
-    "build:watch": "tsc  -w",
+    "build:watch": "tsc -w",
     "xbuild": "tsc -p src/",
     "xbuild:watch": "tsc -p src/ -w",
     "serve": "lite-server -c=bs-config.json",

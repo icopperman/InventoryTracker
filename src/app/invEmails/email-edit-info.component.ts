@@ -29,12 +29,12 @@ export class EmailEditInfoComponent implements OnInit {
             this.origUnits = data['units'];
             this.ccs       = ["East", "West"];
             
-            this.origUnits = _.map(this.origUnits, (aunit: IUnit) => {
+            // this.origUnits = _.map(this.origUnits, (aunit: IUnit) => {
 
-                aunit.campus = (aunit.campus == "E") ? "East" : "West";
-                return aunit;
+            //     aunit.campus = (aunit.campus == "E") ? "East" : "West";
+            //     return aunit;
 
-            })
+            // })
 
             let acampus = this.email.Campus;
 
