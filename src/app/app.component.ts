@@ -12,6 +12,7 @@ import { MessageService } from './messages/message.service';
     templateUrl: './app/app.component.html'
 })
 export class AppComponent {
+    
     pageTitle: string = 'Tablet Inventory Management';
     loading: boolean = true;
 
