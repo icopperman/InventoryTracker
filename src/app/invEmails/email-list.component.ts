@@ -13,6 +13,7 @@ import { EmailService } from './email.service';
     styleUrls: ['./app/invEmails/email-list.component.css']
 })
 export class EmailListComponent implements OnInit {
+    
     pageTitle: string = 'Email List';
     // imageWidth: number = 50;
     // imageMargin: number = 2;
@@ -31,6 +32,7 @@ export class EmailListComponent implements OnInit {
     // }
 
     ngOnInit(): void {
+
         this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
         //this.showImage = (this.route.snapshot.queryParams['showImage'] === 'true');
         // console.log(this.route.snapshot.queryParamMap.get('filterBy'));            

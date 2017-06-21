@@ -14,33 +14,33 @@
                     <a [routerLink]="['/products', 0, 'edit']">Add Product</a>
                 </li>-->
                 <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a [routerLink]="['/units']">Unit List</a>
+                    <a [routerLink]="['/units']">Units </a>
                 </li>
-                <li routerLinkActive="active">
+                <!--<li routerLinkActive="active">
                     <a [routerLink]="['/units', 0, 'edit']">Add Unit</a>
-                </li>
+                </li>-->
                  <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a [routerLink]="['/users']">User List</a>
+                    <a [routerLink]="['/users']">Users</a>
                 </li>
-                <li routerLinkActive="active">
+                <!--<li routerLinkActive="active">
                     <a [routerLink]="['/users', 0, 'edit']">Add User</a>
-                </li>
+                </li>-->
                  <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a [routerLink]="['/tablets']">Tablet List</a>
+                    <a [routerLink]="['/tablets']">Tablets </a>
                 </li>
-                <li routerLinkActive="active">
+                <!--<li routerLinkActive="active">
                     <a [routerLink]="['/tablets', 0, 'edit']">Add Tablet</a>
-                </li>
+                </li>-->
                  <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                    <a [routerLink]="['/emails']">Email List</a>
+                    <a [routerLink]="['/emails']">Emails</a>
                 </li>
-                <li routerLinkActive="active">
+                <!--<li routerLinkActive="active">
                     <a [routerLink]="['/emails', 0, 'edit']">Add Email</a>
-                </li>
+                </li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="userLoginService.isLoggedIn()">
-                    <a [routerLink]="['/login']">Welcome {{ authService.currentUser.userName }}</a>
+                    <a [routerLink]="['/login']">Welcome {{ userLoginService.currentUser.userName }}</a>
                 </li>
                 <li *ngIf="!messageService.isDisplayed">
                     <a (click)="displayMessages()">Show Messages</a>

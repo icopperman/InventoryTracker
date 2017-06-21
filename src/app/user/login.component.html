@@ -17,7 +17,7 @@
                     
                         <input class="form-control" id="userNameId" type="text" name="userName"
                                 required  placeholder="User Name (required)"  
-                                (ngModel) = "userName"  #userNameVar="ngModel" />
+                                [(ngModel)] = "userName"  #userNameVar="ngModel" />
                     
                         <span class="help-block" *ngIf="(userNameVar.touched || userNameVar.dirty) && userNameVar.errors">
                             <span *ngIf="userNameVar.errors.required">
@@ -34,7 +34,7 @@
                     <div class="col-md-8">
                         <input class="form-control" id="passwordId" name="password" type="password" 
                                 required placeholder="Password (required)"
-                                (ngModel) = "password" #passwordVar="ngModel" />
+                                [(ngModel)] = "password" #passwordVar="ngModel" />
 
                         <span class="help-block" *ngIf="passwordVar.errors && (passwordVar.touched || passwordVar.dirty)"  >
                             <span *ngIf="passwordVar.errors.required">

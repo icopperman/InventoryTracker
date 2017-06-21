@@ -5,7 +5,7 @@ import { UserListComponent } from './user-list.component';
 import { UserDetailComponent } from './user-detail.component';
 import { UserEditComponent } from './user-edit.component';
 import { UserEditInfoComponent } from './user-edit-info.component';
-import { UserEditTagsComponent } from './user-edit-tags.component';
+//import { UserEditTagsComponent } from './user-edit-tags.component';
 
 import { UserFilterPipe } from './user-filter.pipe';
 import { UserService } from './user.service';
@@ -13,7 +13,7 @@ import { UserResolver } from './user-resolver.service';
 import { UserEditGuard } from './user-guard.service';
 
 import { SharedModule } from '../shared/shared.module';
-
+import { SharedService } from '../shared/shared.service';
 
 @NgModule({
   imports: [
@@ -60,10 +60,11 @@ import { SharedModule } from '../shared/shared.module';
     UserDetailComponent,
     UserEditComponent,
     UserEditInfoComponent,
-    UserEditTagsComponent,
+    //UserEditTagsComponent,
     UserFilterPipe
   ],
   providers: [
+    SharedService,
     UserService,
     UserResolver,
     UserEditGuard

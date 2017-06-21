@@ -5,6 +5,7 @@ import { MessageService } from '../messages/message.service';
 
 @Injectable()
 export class AuthService {
+    // tslint:disable-next-line:no-trailing-whitespace
     
     currentUser: IUserLogin;
     redirectUrl: string;

@@ -9,22 +9,27 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import * as _ from 'lodash';
 import { IUnit } from './unit';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable()
 export class UnitService {
+    // tslint:disable-next-line:no-trailing-whitespace
     
-    private base = 'http://webdev.nyp.org/InventoryTrackerSvc/';
-    private baseUrl = this.base + 'units';
-    //private baseUrl = 'http://localhost:58087/units';
+    // private base = 'http://webdev.nyp.org/InventoryTrackerSvc/';
+    // private base = 'http://localhost:58087/';
+    private baseUrl = ''; // this.base + 'units';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, shared: SharedService) {
+
+        this.baseUrl = shared.baseURL + 'units';
+     }
 
     getUnits(): Observable<IUnit[]> {
         
-        const url = this.baseUrl;
+        const url = this.baseUrl;// + 'units';
         console.log('get, getUnits: ' + url);
 
-        return this.http.get(this.baseUrl)
+        return this.http.get(url)
             .map(this.extractData)
             .do(data => console.log('getUnits: ')) // + JSON.stringify(data)))
             .catch(this.handleError);

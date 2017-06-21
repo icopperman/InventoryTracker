@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from './auth.service';
+//import { AuthService } from './auth.service';
 import { UserLoginService } from './user-login.service';
 import { IUserLogin } from './user';
 import * as _ from 'lodash';
@@ -14,8 +14,11 @@ export class LoginComponent {
 
     errorMessage: string;
     pageTitle = 'Log In';
-
-    constructor(private authService: AuthService,
+    userName = "irc9012";
+    password = "Word20nyh!";
+    
+    constructor(
+        //private authService: AuthService,
         private userLoginService: UserLoginService,
         private router: Router) { }
 
