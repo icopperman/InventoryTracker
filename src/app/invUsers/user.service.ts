@@ -11,14 +11,19 @@ import 'rxjs/add/observable/of';
 import * as _ from 'lodash';
 
 import { IUser } from './user';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable()
 export class UserService {
 
     private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/users';
     //private baseUrl = 'http://localhost:58087/users';
+    // tslint:disable-next-line:no-trailing-whitespace
     
-    constructor(private http: Http) { }
+    constructor(private http: Http, shared: SharedService) {
+
+        this.baseUrl = shared.baseURL + 'users';
+     }
 
     getUsers(): Observable<IUser[]> {
 

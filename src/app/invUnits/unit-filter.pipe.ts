@@ -11,6 +11,6 @@ export class UnitFilterPipe implements PipeTransform {
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
         
         return filterBy ? value.filter((unit: IUnit) =>
-            unit.unitName.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+            unit.unitName.toLocaleLowerCase().startsWith(filterBy) === true) : value;
     }
 }

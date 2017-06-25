@@ -12,6 +12,8 @@ import * as _ from 'lodash';
 
 import { IUserLogin } from './user';
 import { MessageService } from '../messages/message.service';
+import { SharedService } from '../shared/shared.service';
+
 
 @Injectable()
 export class UserLoginService {
@@ -19,11 +21,14 @@ export class UserLoginService {
     currentUser: IUserLogin;
     redirectUrl: string = "";
 
-    private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc';
-    //private baseUrl = 'http://localhost:58087/users';
+    // private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc';
+    private baseURL = ''; // 'http://localhost:58087';
 
     constructor(private http: Http,
-        private messageService: MessageService) { }
+        private messageService: MessageService, shared: SharedService) {
+
+            this.baseURL = shared.baseURL + 'login';
+         }
 
     isLoggedIn(): boolean {
 
@@ -36,7 +41,7 @@ export class UserLoginService {
     login(userName: string, password: string): Observable<IUserLogin> {
 
         //user.idUser = undefined;
-        const url = `${this.baseUrl}/login`;
+        const url = this.baseURL; //`${this.baseUrl}/login`;
         console.log('post, login: ' + url);
 
        //userName = 'irc9012';
@@ -54,12 +59,12 @@ export class UserLoginService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(url, auser, options)
-            .map(this.extractData)
+            .map(this.extractData, this)
             .do(data => console.log('login: '))// + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    private extractData(response: Response) : IUserLogin {
+    extractData = (response: Response) : IUserLogin => {
 
         let body = response.json();
 
@@ -88,6 +93,7 @@ export class UserLoginService {
 
             auser.isAdmin = userType;
             auser.preferredCampus = (auser.preferredCampus == 'E') ? "East" : "West";
+            this.currentUser = auser;
 
             return auser;
 
@@ -130,10 +136,10 @@ export class UserLoginService {
     }
     getUsers(): Observable<IUserLogin[]> {
 
-        const url = this.baseUrl;
+        const url = this.baseURL;
         console.log('get, getUsers: ' + url);
 
-        return this.http.get(this.baseUrl)
+        return this.http.get(this.baseURL)
             .map(this.extractData)
             .do(data => console.log('getUsers: '))// + JSON.stringify(data)))
             .catch(this.handleError);

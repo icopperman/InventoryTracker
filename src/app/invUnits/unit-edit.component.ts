@@ -51,7 +51,12 @@ export class UnitEditComponent implements OnInit {
     onUnitRetrieved(data: any): void {
        
         this.unit = data['unit'];
+        let func = data.func;
 
+        if ( func == 'delete') {
+            this.deleteUnit();
+
+        }
         // Adjust the title
         if (this.unit.idUnit === 0) {
 

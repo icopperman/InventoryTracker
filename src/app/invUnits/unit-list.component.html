@@ -10,6 +10,9 @@
             <div class="col-md-4">
                 <input type="text" [(ngModel)]="listFilter" />
             </div>
+              <div class="col-md-2 pull-right">
+               <a [routerLink]="['/units', 0, 'edit']" class="btn btn-primary">Add Unit</a>
+            </div>
         </div>
         <div class="row" *ngIf="listFilter">
             <div class="col-md-6">
@@ -62,6 +65,12 @@
                             <a class="btn btn-primary" 
                                [routerLink]="[unit.idUnit, 'edit']">
                                 Edit
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" 
+                               [routerLink]="[unit.idUnit, 'delete']">
+                                Delete
                             </a>
                         </td>
                     </tr>

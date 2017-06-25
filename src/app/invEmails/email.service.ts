@@ -9,13 +9,18 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
 import { IEmail } from './email';
+import { SharedService } from '../shared/shared.service';
 
 @Injectable()
 export class EmailService {
+    // tslint:disable-next-line:no-trailing-whitespace
     
-    private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc/email';
+    private baseUrl = ''; // http://webdev.nyp.org/InventoryTrackerSvc/email';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, shared: SharedService) {
+
+        this.baseUrl = shared.baseURL + 'email';
+     }
 
     getEmails(): Observable<IEmail[]> {
         return this.http.get(this.baseUrl)

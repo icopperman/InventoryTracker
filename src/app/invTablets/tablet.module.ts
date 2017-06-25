@@ -5,7 +5,7 @@ import { TabletListComponent } from './tablet-list.component';
 import { TabletDetailComponent } from './tablet-detail.component';
 import { TabletEditComponent } from './tablet-edit.component';
 import { TabletEditInfoComponent } from './tablet-edit-info.component';
-import { TabletEditTagsComponent } from './tablet-edit-tags.component';
+//import { TabletEditTagsComponent } from './tablet-edit-tags.component';
 import { UnitService } from '../invUnits/unit.service';
 
 import { TabletService } from './tablet.service';
@@ -15,7 +15,7 @@ import { TabletFilterPipe } from './tablet-filter.pipe';
 import { TabletEditGuard } from './tablet-guard.service';
 
 import { SharedModule } from '../shared/shared.module';
-
+import { SharedService } from '../shared/shared.service';
 
 @NgModule({
   imports: [
@@ -65,10 +65,11 @@ import { SharedModule } from '../shared/shared.module';
     TabletDetailComponent,
     TabletEditComponent,
     TabletEditInfoComponent,
-    TabletEditTagsComponent,
+    //TabletEditTagsComponent,
     TabletFilterPipe
   ],
   providers: [
+    SharedService,
     TabletService,
     TabletResolver,
     TabletUnitsResolver,

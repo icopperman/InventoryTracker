@@ -5,7 +5,7 @@ import { EmailListComponent } from './email-list.component';
 import { EmailDetailComponent } from './email-detail.component';
 import { EmailEditComponent } from './email-edit.component';
 import { EmailEditInfoComponent } from './email-edit-info.component';
-import { EmailEditTagsComponent } from './email-edit-tags.component';
+//import { EmailEditTagsComponent } from './email-edit-tags.component';
 
 import { UnitService } from '../invUnits/unit.service';
 import { EmailService } from './email.service';
@@ -15,7 +15,7 @@ import { EmailFilterPipe } from './email-filter.pipe';
 import { EmailEditGuard } from './email-guard.service';
 
 import { SharedModule } from '../shared/shared.module';
-
+import { SharedService } from '../shared/shared.service';
 
 @NgModule({
   imports: [
@@ -65,10 +65,11 @@ import { SharedModule } from '../shared/shared.module';
     EmailDetailComponent,
     EmailEditComponent,
     EmailEditInfoComponent,
-    EmailEditTagsComponent,
+    //EmailEditTagsComponent,
     EmailFilterPipe
   ],
   providers: [
+    SharedService,
     EmailService,
     EmailEditGuard,
     EmailResolver,

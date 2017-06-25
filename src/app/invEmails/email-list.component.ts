@@ -13,6 +13,7 @@ import { EmailService } from './email.service';
     styleUrls: ['./app/invEmails/email-list.component.css']
 })
 export class EmailListComponent implements OnInit {
+    
     pageTitle: string = 'Email List';
     // imageWidth: number = 50;
     // imageMargin: number = 2;

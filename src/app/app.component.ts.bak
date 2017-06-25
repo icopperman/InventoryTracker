@@ -3,7 +3,7 @@ import { Router, Event,
     NavigationStart, NavigationEnd, NavigationError, NavigationCancel,
     RoutesRecognized, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
-//import { AuthService } from './user/auth.service';
+import { AuthService } from './user/auth.service';
 import { UserLoginService } from "./user/user-login.service";
 import { MessageService } from './messages/message.service';
 
