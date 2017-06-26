@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormArray, FormArrayName, FormBuilder, FormControl, FormControlName
+            , FormGroup, FormGroupName, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+
 import * as _ from 'lodash';
 
-import { IEmail } from './email';
+import { IEmail, Email } from './email';
 import { IUnit } from '../invUnits/unit';
 
 @Component({
@@ -18,13 +20,54 @@ export class EmailEditInfoComponent implements OnInit {
     selectedUnit: string;
     ccs: string[];
     origUnits: IUnit[];
+    
+    emailFormGroup: FormGroup;
+    emai: Email = new Email();
 
-    constructor(private route: ActivatedRoute) { }
+
+    constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
+
+    emailChanges(c: AbstractControl) : void {
+
+        if ( (c.touched || c.dirty ) && c.errors) {
+
+        }
+    }
+
+    campusChanges(c: AbstractControl) : void {
+        
+        if ( (c.touched || c.dirty ) && c.errors) {
+            
+        }
+    }
+
+    unitsChanges(c: AbstractControl) : void {
+        
+        if ( (c.touched || c.dirty ) && c.errors) {
+            
+        }
+    }
 
     ngOnInit(): void {
+        
+        this.emailFormGroup = this.fb.group({
+            emailName: ['', [Validators.required, Validators.email]],
+            emailCampus: ['', [Validators.required]],
+            units: ['', [Validators.required]]
+        })
+          
+        let fldEmail  = this.emailFormGroup.get('emailName');
+        let fldCampus = this.emailFormGroup.get('emailCampus');
+        let fldUnits  = this.emailFormGroup.get('unitsSelector');
+        
+        fldEmail.valueChanges.subscribe(val=>this.emailChanges(fldEmail));
+        fldCampus.valueChanges.subscribe(val=>this.campusChanges(fldEmail));
+        fldUnits.valueChanges.subscribe(val=>this.unitsChanges(fldEmail));
+        
 
         this.route.parent.data.subscribe(data => {
-            
+
+
             this.email     = data['email'];
             this.origUnits = data['units'];
             this.ccs       = ["East", "West"];

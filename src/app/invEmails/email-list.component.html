@@ -56,17 +56,17 @@
                         </td>
                         <td>{{ email.Campus }}</td>
                         <td>{{ email.Unit }}</td>
-                        <!--<td>{{ email.emailAddress | lowercase }}</td>-->
-                        <!--<td>
-                            <ai-star [rating]="email.starRating">
-                            </ai-star>
-                       </td>-->
                        <td>
                             <a class="btn btn-primary" 
                                [routerLink]="[email.tblIdx, 'edit']">
                                 Edit
                             </a>
                         </td>
+                        <!--<td>{{ email.emailAddress | lowercase }}</td>-->
+                        <!--<td>
+                            <ai-star [rating]="email.starRating">
+                            </ai-star>
+                       </td>-->
                     </tr>
                 </tbody>
             </table>
