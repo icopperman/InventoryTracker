@@ -1,91 +1,68 @@
 <div class="panel-body">
-    <form class="form-horizontal"
-          novalidate
-          [formGroup]="emailFormGroup:>
+    
+    <form class="form-horizontal" novalidate [formGroup]="emailFormGroup">
+    
         <fieldset>
+    
             <legend>Basic email Information</legend>
+    
             <div class="form-group" 
-                    [ngClass]="{'has-error': (emailFormGroup.get('emailName').touched || 
-                                              emaiFormGroup.get('emailName').dirty || email.tblIdx !== 0) && 
-                                              emaiFormGroup.get('emailName').valid }">
-                <label class="col-md-2 control-label" 
-                        for="emailNameId">Email Address</label>
-                <div class="col-md-8">
-                    <input class="form-control" 
-                            id="emailNameId" 
-                            formControlName="emailName"
-                            type="email" 
-                            placeholder="Email (required)"
-                             />
-                    <span class="help-block" *ngIf="emaiFormGroup.get('emailName').touched ||
-                                                    emaiFormGroup.get('emailName').dirty || email.tblIdx !== 0) &&
-                                                    emaiFormGroup.get('emailName').errors">
-                        <span *ngIf=emaiFormGroup.get('emailName').errors.required">
-                            Email address is required.
-                        </span>
-                        <span *ngIf=emaiFormGroup.get('emailName').errors.minlength">
-                            Email address must be at least three characters.
-                        </span>
+            [ngClass]="{'has-error': (emailFormGroup.get('emailName').touched || emailFormGroup.get('emailName').dirty || emailClass.tblIdx !== 0 ) && !mailFormGroup.get('emailName').valid } ">
+                <label class="col-md-2 control-label " for="emailNameId ">Email Address</label>
+                <div class="col-md-8 ">
+                    <input class="form-control" id="emailNameId" formControlName="emailName" type="email" placeholder="Email (required) " />
+                    <span class="help-block " 
+                    *ngIf="(emailFormGroup.get('emailName').touched || 
+                    emailFormGroup.get('emailName').dirty || emailClass.tblIdx !== 0 ) && emailFormGroup.get( 'emailName').errors ">
+                        <span *ngIf="emailFormGroup.get('emailName').errors.required">Email address is required.</span>
+                        <span *ngIf="emailFormGroup.get('emailName').errors.minlength">Email address must be at least three characters.</span>
                     </span>
                 </div>
             </div>
             
-            <div class="form-group" 
-                    [ngClass]="{'has-error': emailFormGroup.get('emailCampus').touched || 
-                                            emailFormGroup.get('emailCampus').dirty || email.tblIdx !== 0) && 
-                                              emailFormGroup.get('emailCampus').valid }">
-                <label class="col-md-2 control-label" for="emailCodeId">Campus</label>
-
-                <div class="col-md-8">
-                    <select class="form-control" 
-                            id="emailCampus" 
-                            placeholder="Campus (required)"
-                            formControlName="emailCampus"
-                            <option *ngFor="let c of ccs" [value]="c" >{{c}}</option>
-                           
+            <div class="form-group " 
+            [ngClass]="{ 'has-error': (emailFormGroup.get('emailCampus').touched 
+            || emailFormGroup.get('emailCampus').dirty 
+            || emailClass.tblIdx !== 0 ) && !emailFormGroup.get('emailCampus').valid } ">
+                <label class="col-md-2 control-label " for="emailCodeId ">Campus</label>
+                <div class="col-md-8 ">
+                    <select class="form-control " id="emailCampus" placeholder="Campus (required) " formControlName="emailCampus">
+                            <option *ngFor="let c of ccs " [selected]="c == email.Campus" [value]="c" >{{c}}</option>
                     </select>
-                    <span class="help-block" *ngIf="emailFormGroup.get('emailCampus').touched ||
-                                                    emailFormGroup.get('emailCampus').dirty || email.tblIdx !== 0) &&
-                                                    emailFormGroup.get('emailCampus').errors">
-                        <span *ngIf=emailFormGroup.get('emailCampus').errors.required">
-                            Campus is required.
-                        </span>
+                    <span class="help-block " 
+                    *ngIf="(emailFormGroup.get('emailCampus').touched 
+                    || emailFormGroup.get('emailCampus').dirty || emailClass.tblIdx !== 0 ) && emailFormGroup.get( 'emailCampus').errors ">
+                        <span *ngIf="emailFormGroup.get( 'emailCampus').errors.required ">Campus is required.</span>
                     </span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="unitsSelector">Units</label>
 
-                <div class="col-md-8">
-                    <!--<input class="form-control" 
-                            id="emailUnit" 
-                            name="emailUnit"
-                            placeholder="Unit (required)"
+            <div class="form-group ">
+                <label class="col-md-2 control-label " for="unitsSelector">Units</label>
+                <div class="col-md-8 ">
+                    <select class="form-control" id="unitsSelector" formControlName="unitsSelector" placeholder="Select a Unit " >
+                        <option *ngFor="let unit of units" [selected]="email.Unit == unit.unitName" [value]="unit.unitName" >{{unit.unitName}}</option>
+                    </select>
+                    <span class="help-block " *ngIf="(emailFormGroup.get('unitsSelector').touched 
+                    || emailFormGroup.get('unitsSelector').dirty || email.tblIdx !== 0 ) && emailFormGroup.get('unitsSelector').errors ">
+                        <span *ngIf="emailFormGroup.get('unitsSelector').errors.required ">Unit is required.</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="has-error " *ngIf="errorMessage ">{{errorMessage}}</div>
+
+        </fieldset>
+
+    </form>
+
+</div>
+
+    <!--<input class="form-control " 
+                            id="emailUnit " 
+                            name="emailUnit "
+                            placeholder="Unit (required) "
                             required
                             [(ngModel)] = email.Unit
-                            #emailUnitVar="ngModel" />
+                            #emailUnitVar="ngModel " />
                             -->
-                    <select class="form-control"
-                            id="unitsSelector"
-                            formControlName="unitsSelector"
-                            placeholder="Select a Unit"
-                            
-                        >
-                        <option *ngFor="let unit of units" [value]="unit.unitName" >{{unit.unitName}}</option>
-                    </select>
-
-                            <span class="help-block" *ngIf="(emailFormGroup.get('units').touched ||
-                                                     emailFormGroup.get('units').dirty || email.tblIdx !== 0) &&
-                                                     emailFormGroup.get('units').errors">
-
-                        <span *ngIf="emailFormGroup.get('units').errors.required">
-                            Unit is required.
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
-        </fieldset>
-    </form>
-</div>

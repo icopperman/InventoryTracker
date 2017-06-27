@@ -22,7 +22,7 @@ export class EmailEditInfoComponent implements OnInit {
     origUnits: IUnit[];
     
     emailFormGroup: FormGroup;
-    emai: Email = new Email();
+    emailClass: Email = new Email();
 
 
     constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
@@ -30,21 +30,23 @@ export class EmailEditInfoComponent implements OnInit {
     emailChanges(c: AbstractControl) : void {
 
         if ( (c.touched || c.dirty ) && c.errors) {
-
+            console.log('here');
         }
     }
 
     campusChanges(c: AbstractControl) : void {
         
+        this.campusChanged(c.value)
+
         if ( (c.touched || c.dirty ) && c.errors) {
-            
+            console.log('here');
         }
     }
 
     unitsChanges(c: AbstractControl) : void {
         
         if ( (c.touched || c.dirty ) && c.errors) {
-            
+            console.log('here');
         }
     }
 
@@ -53,7 +55,7 @@ export class EmailEditInfoComponent implements OnInit {
         this.emailFormGroup = this.fb.group({
             emailName: ['', [Validators.required, Validators.email]],
             emailCampus: ['', [Validators.required]],
-            units: ['', [Validators.required]]
+            unitsSelector: ['', [Validators.required]]
         })
           
         let fldEmail  = this.emailFormGroup.get('emailName');
@@ -89,10 +91,15 @@ export class EmailEditInfoComponent implements OnInit {
             this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == acampus);
 
             this.email.Campus = acampus;
+            this.emailFormGroup.setValue({
+                emailName: this.email.EmailAddress,
+                emailCampus: this.email.Campus,
+                unitsSelector: this.units
+            });
 
-            if (this.emailForm) {
-                this.emailForm.reset();
-            }
+            //if (this.emailForm) {
+            //    this.emailForm.reset();
+            //}
 
         });
     }
