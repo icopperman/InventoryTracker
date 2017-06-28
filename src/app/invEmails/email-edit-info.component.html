@@ -7,13 +7,17 @@
             <legend>Basic email Information</legend>
     
             <div class="form-group" 
-            [ngClass]="{'has-error': (emailFormGroup.get('emailName').touched || emailFormGroup.get('emailName').dirty || emailClass.tblIdx !== 0 ) && !mailFormGroup.get('emailName').valid } ">
+            [ngClass]="{'has-error': (emailFormGroup.get('emailName').touched 
+                                   || emailFormGroup.get('emailName').dirty 
+                                   || emailClass.tblIdx !== 0 ) && !emailFormGroup.get('emailName').valid } ">
                 <label class="col-md-2 control-label " for="emailNameId ">Email Address</label>
                 <div class="col-md-8 ">
                     <input class="form-control" id="emailNameId" formControlName="emailName" type="email" placeholder="Email (required) " />
                     <span class="help-block " 
                     *ngIf="(emailFormGroup.get('emailName').touched || 
-                    emailFormGroup.get('emailName').dirty || emailClass.tblIdx !== 0 ) && emailFormGroup.get( 'emailName').errors ">
+                            emailFormGroup.get('emailName').dirty   || 
+                            emailClass.tblIdx !== 0 ) && 
+                            emailFormGroup.get('emailName').errors ">
                         <span *ngIf="emailFormGroup.get('emailName').errors.required">Email address is required.</span>
                         <span *ngIf="emailFormGroup.get('emailName').errors.minlength">Email address must be at least three characters.</span>
                     </span>
@@ -22,8 +26,9 @@
             
             <div class="form-group " 
             [ngClass]="{ 'has-error': (emailFormGroup.get('emailCampus').touched 
-            || emailFormGroup.get('emailCampus').dirty 
-            || emailClass.tblIdx !== 0 ) && !emailFormGroup.get('emailCampus').valid } ">
+                                    || emailFormGroup.get('emailCampus').dirty 
+                                    || emailClass.tblIdx !== 0 ) 
+                                   && !emailFormGroup.get('emailCampus').valid } ">
                 <label class="col-md-2 control-label " for="emailCodeId ">Campus</label>
                 <div class="col-md-8 ">
                     <select class="form-control " id="emailCampus" placeholder="Campus (required) " formControlName="emailCampus">
@@ -31,8 +36,10 @@
                     </select>
                     <span class="help-block " 
                     *ngIf="(emailFormGroup.get('emailCampus').touched 
-                    || emailFormGroup.get('emailCampus').dirty || emailClass.tblIdx !== 0 ) && emailFormGroup.get( 'emailCampus').errors ">
-                        <span *ngIf="emailFormGroup.get( 'emailCampus').errors.required ">Campus is required.</span>
+                         || emailFormGroup.get('emailCampus').dirty 
+                         || emailClass.tblIdx !== 0 ) 
+                         && emailFormGroup.get('emailCampus').errors ">
+                        <span *ngIf="emailFormGroup.get('emailCampus').errors.required ">Campus is required.</span>
                     </span>
                 </div>
             </div>

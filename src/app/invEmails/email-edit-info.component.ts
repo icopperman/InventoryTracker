@@ -58,17 +58,16 @@ export class EmailEditInfoComponent implements OnInit {
             unitsSelector: ['', [Validators.required]]
         })
           
-        let fldEmail  = this.emailFormGroup.get('emailName');
-        let fldCampus = this.emailFormGroup.get('emailCampus');
-        let fldUnits  = this.emailFormGroup.get('unitsSelector');
+        const fldEmail  = this.emailFormGroup.get('emailName');
+        const fldCampus = this.emailFormGroup.get('emailCampus');
+        //const fldUnits  = this.emailFormGroup.get('unitsSelector');
         
-        fldEmail.valueChanges.subscribe(val=>this.emailChanges(fldEmail));
-        fldCampus.valueChanges.subscribe(val=>this.campusChanges(fldEmail));
-        fldUnits.valueChanges.subscribe(val=>this.unitsChanges(fldEmail));
+        fldEmail.valueChanges.subscribe((val=>this.emailChanges(fldEmail));
+        fldCampus.valueChanges.subscribe(val=>this.campusChanges(fldCampus));
+        //fldUnits.valueChanges.subscribe(val=>this.unitsChanges(fldUnits));
         
 
         this.route.parent.data.subscribe(data => {
-
 
             this.email     = data['email'];
             this.origUnits = data['units'];
