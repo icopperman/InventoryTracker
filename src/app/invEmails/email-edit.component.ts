@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+
 import * as _ from 'lodash';
+
 
 import { MessageService } from '../messages/message.service';
 
@@ -36,9 +39,13 @@ export class EmailEditComponent implements OnInit {
     }
 
     get email(): IEmail {
+    
         return this.currentEmail
-    }
+    
+}
+
     set email(value: IEmail) {
+
         this.currentEmail = value;
         this.currentEmail.Campus = (this.currentEmail.Campus == "E" ) ? "East" : "West";
 
@@ -54,11 +61,14 @@ export class EmailEditComponent implements OnInit {
     ngOnInit(): void {
         // Watch for changes to the resolve data
         this.route.data.subscribe(data => {
+            
              this.onEmailRetrieved(data);
+             
         });
     }
 
     onEmailRetrieved(data: any): void {
+
         this.email = data['email'];
         this.units = data['units'];
         let eunit = this.email.Unit;
@@ -73,19 +83,20 @@ export class EmailEditComponent implements OnInit {
         }
         
         // Adjust the title
-        if (this.email.tblIdx === 0) {
-            this.pageTitle = 'Add Email';
-        } else {
-            this.pageTitle = `Edit Email: ${this.email.EmailAddress}`;
-        }
+        this.pageTitle = (this.email.tblIdx === 0) ? 'Add Email' : `Edit Email: ${this.email.EmailAddress}`;
+    
     }
 
     deleteEmail(): void {
+    
         if (this.email.tblIdx === 0) {
             // Don't delete, it was never saved.
             this.onSaveComplete(`${this.email.EmailAddress} was deleted`);
-        } else {
+    
+    } else {
+
             if (confirm(`Really delete the email: ${this.email.EmailAddress}?`)) {
+
                 this.emailService.deleteEmail(this.email.tblIdx)
                     .subscribe(
                         () => this.onSaveComplete(`${this.email.EmailAddress} was deleted`),
@@ -96,7 +107,9 @@ export class EmailEditComponent implements OnInit {
     }
 
     isValid(path: string): boolean {
+
         this.validate();
+
         if (path) {
             return this.dataIsValid[path];
         }
@@ -105,6 +118,7 @@ export class EmailEditComponent implements OnInit {
     }
 
     saveEmail(): void {
+
         if (this.isValid(null)) {
 
             if ( this.email.Campus.length > 1 ) {
@@ -124,6 +138,7 @@ export class EmailEditComponent implements OnInit {
     }
 
     onSaveComplete(message?: string): void {
+
         if (message) {
             this.messageService.addMessage(message);
         }
@@ -135,6 +150,7 @@ export class EmailEditComponent implements OnInit {
     // Reset the data
     // Required after a save so the data is no longer seen as dirty.
     reset(): void {
+
         this.dataIsValid = null;
         this.currentEmail = null;
         this.originalEmail = null;
