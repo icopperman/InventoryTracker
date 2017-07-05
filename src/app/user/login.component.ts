@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-//import { AuthService } from './auth.service';
+// import { AuthService } from './auth.service';
 import { UserLoginService } from './user-login.service';
 import { IUserLogin } from './user';
 import * as _ from 'lodash';
@@ -14,11 +14,13 @@ export class LoginComponent {
 
     errorMessage: string;
     pageTitle = 'Log In';
-    userName = "irc9012";
-    password = "Word20nyh!";
+    userName = 'irc9012';
+    password = 'Word20nyh!';
+    // tslint:disable-next-line:no-trailing-whitespace
     
+
     constructor(
-        //private authService: AuthService,
+        // private authService: AuthService,
         private userLoginService: UserLoginService,
         private router: Router) { }
 
@@ -26,7 +28,7 @@ export class LoginComponent {
 
         console.log('here');
 
-        if ( _.isEmpty(this.userLoginService.redirectUrl) == false ) {
+        if ( _.isEmpty(this.userLoginService.redirectUrl) === false ) {
 
             this.router.navigateByUrl(this.userLoginService.redirectUrl);
 
@@ -37,7 +39,7 @@ export class LoginComponent {
         }
     }
 
-    handleError = (xx) => {
+    handleError = (xx: any) => {
 
         console.log('here');
         this.errorMessage = 'Please enter a user name and password.';
@@ -57,7 +59,7 @@ export class LoginComponent {
                     
                     console.log('here');
 
-                    if ( _.isEmpty(this.userLoginService.redirectUrl) == false) {
+                    if ( _.isEmpty(this.userLoginService.redirectUrl) === false) {
 
                         this.router.navigateByUrl(this.userLoginService.redirectUrl);
 
@@ -70,7 +72,7 @@ export class LoginComponent {
                 this.handleError
                 );
 
-            //.subscribe(this.loginComplete, this.handleError)
+            // .subscribe(this.loginComplete, this.handleError)
 
         }
         else {

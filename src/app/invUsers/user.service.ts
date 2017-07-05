@@ -68,13 +68,13 @@ export class UserService {
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        let userType: string = "";
+        let userType: string = '';
 
         switch (user.isAdmin) {
 
-            case 'Admin': userType = "Y"; break;
-            case 'User': userType = "N"; break;
-            case 'Non-Clinical': userType = "X"; break;
+            case 'Admin': userType = 'Y'; break;
+            case 'User': userType = 'N'; break;
+            case 'Non-Clinical': userType = 'X'; break;
         }
 
         if (user.idUser === 0) {
@@ -88,7 +88,7 @@ export class UserService {
 
     private createUser(user: IUser, options: RequestOptions): Observable<IUser> {
 
-        //user.idUser = undefined;
+        // user.idUser = undefined;
         const url = `${this.baseUrl}/add`;
         console.log('post, addUser: ' + url);
 
@@ -105,7 +105,7 @@ export class UserService {
 
         if (user.preferredCampus.length > 1) {
 
-            user.preferredCampus = (user.preferredCampus == "East") ? "E" : "W";
+            user.preferredCampus = (user.preferredCampus === 'East') ? 'E' : 'W';
 
         }
 
@@ -119,11 +119,11 @@ export class UserService {
 
         let body = response.json();
 
-        if ( body.Status == 'error') {
+        if ( body.Status === 'error') {
 
                console.log(body.Status + ',' + body.ErrMsg);
-               throw new Error("Server Error - " + body.ErrMsg);
-               //return Observable.throw('Server error - cwid not recognized');
+               throw new Error('Server Error - ' + body.ErrMsg);
+               // return Observable.throw('Server error - cwid not recognized');
 
         }
 
@@ -131,25 +131,26 @@ export class UserService {
 
         xx = _.map(xx, (auser: IUser) => {
 
-            let userType: string = "User";
+            // tslint:disable-next-line:no-inferrable-types
+            let userType: string = 'User';
             switch (auser.isAdmin) {
 
-                case 'Y': userType = "Admin"; break;
-                case 'N': userType = "User"; break;
-                case 'X': userType = "Non-Clinical"; break;
+                case 'Y': userType = 'Admin'; break;
+                case 'N': userType = 'User'; break;
+                case 'X': userType = 'Non-Clinical'; break;
             }
 
-            if (_.isEmpty(auser.firstName) == true) auser.firstName = "";
-            if (_.isEmpty(auser.lastName) == true) auser.lastName = "";
+            if (_.isEmpty(auser.firstName) === true) auser.firstName = '';
+            if (_.isEmpty(auser.lastName) === true) auser.lastName = '';
 
             auser.isAdmin = userType;
-            auser.preferredCampus = (auser.preferredCampus == 'E') ? "East" : "West";
+            auser.preferredCampus = (auser.preferredCampus === 'E') ? 'East' : 'West';
 
             return auser;
 
-        })
+        });
 
-        if (xx.length == 1) {
+        if (xx.length === 1) {
             return xx[0];
         }
         else {
@@ -187,14 +188,14 @@ export class UserService {
             // starRating: null,
             // imageUrl: null,
             // active: null, 
-            //preferredCampus: null,
-            //preferredCampus1: null,
+            // preferredCampus: null,
+            // preferredCampus1: null,
 
             idUser: 0,
-            //name: null,
-            //site: null,
+            // name: null,
+            // site: null,
             userCwid: null,
-            //userCode: null,
+            // userCode: null,
             firstName: null,
             lastName: null,
             preferredCampus: null,

@@ -1,33 +1,29 @@
 <div class="panel-body">
     <form class="form-horizontal"
           novalidate
-          #emailForm="ngForm">
+          [formGroup]="emailFormGroup:>
         <fieldset>
             <legend>Basic email Information</legend>
             <div class="form-group" 
-                    [ngClass]="{'has-error': (emailNameVar.touched || 
-                                              emailNameVar.dirty || email.tblIdx !== 0) && 
-                                              !emailNameVar.valid }">
+                    [ngClass]="{'has-error': (emailFormGroup.get('emailName').touched || 
+                                              emaiFormGroup.get('emailName').dirty || email.tblIdx !== 0) && 
+                                              emaiFormGroup.get('emailName').valid }">
                 <label class="col-md-2 control-label" 
                         for="emailNameId">Email Address</label>
-
                 <div class="col-md-8">
                     <input class="form-control" 
                             id="emailNameId" 
+                            formControlName="emailName"
                             type="email" 
                             placeholder="Email (required)"
-                            required
-                            minlength="3"
-                            [(ngModel)] = email.EmailAddress
-                            name="emailName"
-                            #emailNameVar="ngModel" />
-                    <span class="help-block" *ngIf="(emailNameVar.touched ||
-                                                     emailNameVar.dirty || email.tblIdx !== 0) &&
-                                                     emailNameVar.errors">
-                        <span *ngIf="emailNameVar.errors.required">
+                             />
+                    <span class="help-block" *ngIf="emaiFormGroup.get('emailName').touched ||
+                                                    emaiFormGroup.get('emailName').dirty || email.tblIdx !== 0) &&
+                                                    emaiFormGroup.get('emailName').errors">
+                        <span *ngIf=emaiFormGroup.get('emailName').errors.required">
                             Email address is required.
                         </span>
-                        <span *ngIf="emailNameVar.errors.minlength">
+                        <span *ngIf=emaiFormGroup.get('emailName').errors.minlength">
                             Email address must be at least three characters.
                         </span>
                     </span>
@@ -35,28 +31,23 @@
             </div>
             
             <div class="form-group" 
-                    [ngClass]="{'has-error': (emailCodeVar.touched || 
-                                              emailCodeVar.dirty || email.tblIdx !== 0) && 
-                                              !emailCodeVar.valid }">
+                    [ngClass]="{'has-error': emailFormGroup.get('emailCampus').touched || 
+                                            emailFormGroup.get('emailCampus').dirty || email.tblIdx !== 0) && 
+                                              emailFormGroup.get('emailCampus').valid }">
                 <label class="col-md-2 control-label" for="emailCodeId">Campus</label>
 
                 <div class="col-md-8">
                     <select class="form-control" 
                             id="emailCampus" 
-                             placeholder="Campus (required)"
-                            required
-                            [(ngModel)] = email.Campus
-                            (ngModelChange)="campusChanged($event)"
-                            name="emailCampus"
-                            #emailCodeVar="ngModel" >
+                            placeholder="Campus (required)"
+                            formControlName="emailCampus"
                             <option *ngFor="let c of ccs" [value]="c" >{{c}}</option>
-
                            
                     </select>
-                    <span class="help-block" *ngIf="(emailCodeVar.touched ||
-                                                     emailCodeVar.dirty || email.tblIdx !== 0) &&
-                                                     emailCodeVar.errors">
-                        <span *ngIf="emailCodeVar.errors.required">
+                    <span class="help-block" *ngIf="emailFormGroup.get('emailCampus').touched ||
+                                                    emailFormGroup.get('emailCampus').dirty || email.tblIdx !== 0) &&
+                                                    emailFormGroup.get('emailCampus').errors">
+                        <span *ngIf=emailFormGroup.get('emailCampus').errors.required">
                             Campus is required.
                         </span>
                     </span>
@@ -76,21 +67,18 @@
                             -->
                     <select class="form-control"
                             id="unitsSelector"
-                            name="unitsSelector"
+                            formControlName="unitsSelector"
                             placeholder="Select a Unit"
-                            required
-                            [(ngModel)]="email.Unit" 
-                            (ngModelChange)="unitChanged($event)"
-                            #tabletUnitsVar
+                            
                         >
                         <option *ngFor="let unit of units" [value]="unit.unitName" >{{unit.unitName}}</option>
                     </select>
 
-                            <span class="help-block" *ngIf="(tabletUnitsVar.touched ||
-                                                     tabletUnitsVar.dirty || email.tblIdx !== 0) &&
-                                                     tabletUnitsVar.errors">
+                            <span class="help-block" *ngIf="(emailFormGroup.get('units').touched ||
+                                                     emailFormGroup.get('units').dirty || email.tblIdx !== 0) &&
+                                                     emailFormGroup.get('units').errors">
 
-                        <span *ngIf="tabletUnitsVar.errors.required">
+                        <span *ngIf="emailFormGroup.get('units').errors.required">
                             Unit is required.
                         </span>
                     </span>
