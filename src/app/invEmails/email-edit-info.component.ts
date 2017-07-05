@@ -42,11 +42,11 @@ export class EmailEditInfoComponent implements OnInit {
 
     private campusValidationMessages = {
         required: 'Campus is required.'
-    }
+    };
 
     private unitsValidationMessages = {
         required: 'Unit is required.'
-    }
+    };
 
 
     emailChanges(c: AbstractControl): void {
@@ -56,7 +56,7 @@ export class EmailEditInfoComponent implements OnInit {
         if ((c.touched || c.dirty) && c.errors) {
 
             let keys = Object.keys(c.errors);
-            let amess: string[] = keys.map(akey => this.emailValidationMessages[akey])
+            let amess: string[] = keys.map(akey => this.emailValidationMessages[akey]);
             let themess = amess.join(' ');
 
             this.emailMessage = themess;
@@ -68,7 +68,7 @@ export class EmailEditInfoComponent implements OnInit {
 
         this.campusMessage = '';
 
-        if (c.pristine == false) {
+        if (c.pristine === false) {
 
             this.email.Campus = c.value;
             this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == c.value);
@@ -77,7 +77,7 @@ export class EmailEditInfoComponent implements OnInit {
         if ((c.touched || c.dirty) && c.errors) {
 
             let keys = Object.keys(c.errors);
-            let amess: string[] = keys.map(akey => this.campusValidationMessages[akey])
+            let amess: string[] = keys.map(akey => this.campusValidationMessages[akey]);
             let themess = amess.join(' ');
 
             this.campusMessage = themess;
@@ -98,7 +98,7 @@ export class EmailEditInfoComponent implements OnInit {
         if ((c.touched || c.dirty) && c.errors) {
 
             let keys = Object.keys(c.errors);
-            let amess: string[] = keys.map(akey => this.unitsValidationMessages[akey])
+            let amess: string[] = keys.map(akey => this.unitsValidationMessages[akey]);
             let themess = amess.join(' ');
 
             this.unitsMessage = themess;
@@ -133,15 +133,15 @@ export class EmailEditInfoComponent implements OnInit {
 
             this.email = data['email'];
             this.origUnits = data['units'];
-            this.ccs = ["East", "West"];
+            this.ccs = ['East', 'West'];
 
             let acampus = this.email.Campus;
-            if (acampus.length == 1) {
+            if (acampus.length === 1) {
 
-                acampus = (acampus == "E") ? "East" : "West";
+                acampus = (acampus === 'E') ? 'East' : 'West';
             }
 
-            this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == acampus);
+            this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus === acampus);
 
             this.email.Campus = acampus;
 

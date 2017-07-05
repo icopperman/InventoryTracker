@@ -53,7 +53,7 @@ import { SharedService } from '../shared/shared.service';
           // }
         ]
       }
-      ,{
+      , {
         path: ':id/delete',
         component: UnitEditComponent,
         data: { func: 'delete', origin: "from :'id/', unitEditComponent delete", idx: 2},

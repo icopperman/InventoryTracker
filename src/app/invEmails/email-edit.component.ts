@@ -40,14 +40,14 @@ export class EmailEditComponent implements OnInit {
 
     get email(): IEmail {
     
-        return this.currentEmail
+        return this.currentEmail;
     
 }
 
     set email(value: IEmail) {
 
         this.currentEmail = value;
-        this.currentEmail.Campus = (this.currentEmail.Campus == "E" ) ? "East" : "West";
+        this.currentEmail.Campus = (this.currentEmail.Campus == 'E' ) ? 'East' : 'West';
 
         // Clone the object to retain a copy
         this.originalEmail = Object.assign({}, value);
@@ -75,7 +75,7 @@ export class EmailEditComponent implements OnInit {
         
         for (let aunit of this.units) {
             
-            if ( eunit == aunit.unitName) {
+            if ( eunit === aunit.unitName) {
 
                 this.email.selectedUnit = aunit;
                 break;
@@ -123,7 +123,7 @@ export class EmailEditComponent implements OnInit {
 
             if ( this.email.Campus.length > 1 ) {
 
-                this.email.Campus = (this.email.Campus == "East") ? "E" : "W";
+                this.email.Campus = (this.email.Campus === 'East') ? 'E' : 'W';
 
             }
 
@@ -163,7 +163,7 @@ export class EmailEditComponent implements OnInit {
         // 'info' tab
         if (this.email.EmailAddress &&
             this.email.EmailAddress.length >= 3 &&
-            this.emailValidator(this.email.EmailAddress) == true &&
+            //this.emailValidator(this.email.EmailAddress) === true &&
             this.email.Campus &&
             this.email.Unit) {
             this.dataIsValid['info'] = true;
@@ -180,12 +180,12 @@ export class EmailEditComponent implements OnInit {
         // }
     }
     
-    emailValidator(email:string): boolean {
-        var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // emailValidator(email: string): boolean {
+    //     var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if (!EMAIL_REGEXP.test(email)) {
-            return false;
-        }
-        return true; 
-    }
+    //     if (!EMAIL_REGEXP.test(email)) {
+    //         return false;
+    //     }
+    //     return true; 
+    // }
 }

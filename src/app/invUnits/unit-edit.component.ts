@@ -26,7 +26,7 @@ export class UnitEditComponent implements OnInit {
     }
 
     get unit(): IUnit {
-        return this.currentUnit
+        return this.currentUnit;
     }
     set unit(value: IUnit) {
         
@@ -53,7 +53,7 @@ export class UnitEditComponent implements OnInit {
         this.unit = data['unit'];
         let func = data.func;
 
-        if ( func == 'delete') {
+        if ( func === 'delete') {
             this.deleteUnit();
 
         }

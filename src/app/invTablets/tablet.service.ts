@@ -75,7 +75,7 @@ export class TabletService {
         let body = response.json();
          let xx = body.Tablets;
 
-        if ( xx.length == 1) {
+        if ( xx.length === 1) {
             return xx[0];
         }
         else {

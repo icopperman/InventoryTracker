@@ -39,9 +39,9 @@ export class TabletListComponent implements OnInit {
             .subscribe(tablets => {
 
                 this.tablets = _.map(tablets, (atablet: ITablet) => {
-                    atablet.Campus = (atablet.Campus == 'E') ? "East" : "West";
+                    atablet.Campus = (atablet.Campus === 'E') ? 'East' : 'West';
                     return atablet;
-                })
+                });
             },
             error => this.errorMessage = <any>error);
     }

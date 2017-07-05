@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 //import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { ProductData } from './products/product-data';
+//import { ProductData } from './products/product-data';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

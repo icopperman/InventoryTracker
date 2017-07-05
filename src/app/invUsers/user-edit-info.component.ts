@@ -24,8 +24,8 @@ export class UserEditInfoComponent implements OnInit {
         this.route.parent.data.subscribe(data => {
             
             this.user = data['user'];
-            this.ccs  = ["East", "West"];
-            this.types = ["Admin", "User", "Non-Clinical"];
+            this.ccs  = ['East', 'West'];
+            this.types = ['Admin', 'User', 'Non-Clinical'];
 
 //            let acampus = this.user.preferredCampus;
 //           this.user.preferredCampus = acampus;

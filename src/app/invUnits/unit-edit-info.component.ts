@@ -26,9 +26,9 @@ export class UnitEditInfoComponent implements OnInit {
             
             this.unit = data['unit'];
             
-            this.ccs       = ["East", "West"];
-            this.types  =["Clinical 1", "Clinical 2", "Non-Clinical"];
-            this.sites = ['Allen','Heart Center','Cornell','Columbia','Milstein','Lower Manhattan']
+            this.ccs       = ['East', 'West'];
+            this.types  = ['Clinical 1', 'Clinical 2', 'Non-Clinical'];
+            this.sites = ['Allen', 'Heart Center', 'Cornell', 'Columbia', 'Milstein', 'Lower Manhattan'];
 
             let acampus = this.unit.campus;
 

@@ -26,7 +26,7 @@ export class UnitService {
 
     getUnits(): Observable<IUnit[]> {
         
-        const url = this.baseUrl;// + 'units';
+        const url = this.baseUrl; // + 'units';
         console.log('get, getUnits: ' + url);
 
         return this.http.get(url)
@@ -104,7 +104,7 @@ export class UnitService {
         console.log('put, updateUnit: ' + url);
 
         if ( unit.campus.length > 1 ) {
-            unit.campus = (unit.campus == "East") ? "E" : "W";
+            unit.campus = (unit.campus === 'East') ? 'E' : 'W';
         }
 
         return this.http.put(url, unit, options)
@@ -119,11 +119,11 @@ export class UnitService {
         let xx = body.Units;
         
         xx = _.map(xx, (aunit: IUnit) => {
-                    aunit.campus = (aunit.campus == 'E') ? "East" : "West";
+                    aunit.campus = (aunit.campus === 'E') ? 'East' : 'West';
                     return aunit;
-                })
+                });
            
-        if ( xx.length == 1) {
+        if ( xx.length === 1) {
             return xx[0];
         }
         else {

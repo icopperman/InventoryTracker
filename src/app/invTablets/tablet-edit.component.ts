@@ -23,7 +23,7 @@ export class TabletEditComponent implements OnInit {
     get isDirty(): boolean {
         let currTablet;
 
-        if (_.isEmpty(this.currentTablet) == true) {
+        if (_.isEmpty(this.currentTablet) === true) {
         
             return false;
         }
@@ -34,11 +34,11 @@ export class TabletEditComponent implements OnInit {
     }
 
     get tablet(): ITablet {
-        return this.currentTablet
+        return this.currentTablet;
     }
     set tablet(value: ITablet) {
         this.currentTablet = value;
-        this.currentTablet.Campus = (this.currentTablet.Campus == "E" ) ? "East" : "West";
+        this.currentTablet.Campus = (this.currentTablet.Campus === 'E' ) ? 'East' : 'West';
 
         // Clone the object to retain a copy
         this.originalTablet = Object.assign({}, value);
@@ -62,7 +62,7 @@ export class TabletEditComponent implements OnInit {
 
         for (let aunit of this.units) {
             
-            if ( this.tablet.Unit == aunit.unitName) {
+            if ( this.tablet.Unit === aunit.unitName) {
 
                 this.tablet.selectedUnit = aunit;
                 break;
@@ -106,7 +106,7 @@ export class TabletEditComponent implements OnInit {
              
              if ( this.tablet.Campus.length > 1 ) {
 
-                this.tablet.Campus = (this.tablet.Campus == "East") ? "E" : "W";
+                this.tablet.Campus = (this.tablet.Campus === 'East') ? 'E' : 'W';
 
             }
 

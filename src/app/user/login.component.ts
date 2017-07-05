@@ -14,8 +14,8 @@ export class LoginComponent {
 
     errorMessage: string;
     pageTitle = 'Log In';
-    userName = "irc9012";
-    password = "Word20nyh!";
+    userName = 'irc9012';
+    password = 'Word20nyh!';
     loading: boolean = false;
 
     constructor(
@@ -32,7 +32,7 @@ export class LoginComponent {
             this.loading = true;
 
             this.userLoginService.login(userName, password)
-                        .subscribe(this.loginComplete, this.handleError)
+                        .subscribe(this.loginComplete, this.handleError);
                 // .subscribe(
                 // (theuser: IUserLogin) => {B
 
@@ -65,7 +65,7 @@ export class LoginComponent {
         console.log('here');
         this.loading = false;
 
-        if (_.isEmpty(this.userLoginService.redirectUrl) == false) {
+        if (_.isEmpty(this.userLoginService.redirectUrl) === false) {
 
             this.router.navigateByUrl(this.userLoginService.redirectUrl);
 

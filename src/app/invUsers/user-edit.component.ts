@@ -26,7 +26,7 @@ export class UserEditComponent implements OnInit {
     }
 
     get user(): IUser {
-        return this.currentUser
+        return this.currentUser;
     }
     set user(value: IUser) {
         this.currentUser = value;
@@ -64,7 +64,7 @@ export class UserEditComponent implements OnInit {
 
     deleteUser(): void {
         
-        if (this.user.idUser=== 0) {
+        if (this.user.idUser === 0) {
             // Don't delete, it was never saved.
             this.onSaveComplete(`${this.user.userCwid} was deleted`);
 

@@ -4,7 +4,7 @@ import { Router, Event,
     RoutesRecognized, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 //import { AuthService } from './user/auth.service';
-import { UserLoginService } from "./user/user-login.service";
+import { UserLoginService } from './user/user-login.service';
 import { MessageService } from './messages/message.service';
 
 @Component({
@@ -32,39 +32,39 @@ export class AppComponent {
 
         if (routerEvent instanceof NavigationStart) {
             this.loading = true;
-            console.log('navstart:' + this.loading)
+            console.log('navstart:' + this.loading);
         }
 
         if (routerEvent instanceof NavigationEnd ) {
             this.loading = false;
-            console.log('navend:' + this.loading)
+            console.log('navend:' + this.loading);
         }
 
         if ( routerEvent instanceof NavigationCancel ) 
         { 
             this.loading = false;
-            console.log('navcancel:' + this.loading)
+            console.log('navcancel:' + this.loading);
         } 
 
         if ( routerEvent instanceof NavigationError) {
         
             this.loading = false;
-            console.log('naverrror:' + this.loading)
+            console.log('naverrror:' + this.loading);
         }
         if ( routerEvent instanceof RoutesRecognized) {
         
             //this.loading = false;
-            console.log('routesRec:' + this.loading)
+            console.log('routesRec:' + this.loading);
         }
         if ( routerEvent instanceof RouteConfigLoadStart) {
         
             //this.loading = false;
-            console.log('routesConfigLoadStart:' + this.loading)
+            console.log('routesConfigLoadStart:' + this.loading);
         }
         if ( routerEvent instanceof RouteConfigLoadEnd) {
         
             //this.loading = false;
-            console.log('routesConfigLoadEnd:' + this.loading)
+            console.log('routesConfigLoadEnd:' + this.loading);
         }
     }
 

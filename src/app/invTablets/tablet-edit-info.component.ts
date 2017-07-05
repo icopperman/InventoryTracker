@@ -26,8 +26,8 @@ export class TabletEditInfoComponent implements OnInit {
         this.route.parent.data.subscribe(data => {
             this.tablet = data['tablet'];
             this.origUnits = data['units'];
-            this.ccs       = ["East", "West"];
-            this.statuses  =["Unassigned", "Assigned"]
+            this.ccs       = ['East', 'West'];
+            this.statuses  = ['Unassigned', 'Assigned'];
             // this.origUnits = _.map(this.origUnits, (aunit: IUnit) => {
 
             //     aunit.campus = (aunit.campus == "E") ? "East" : "West";
@@ -37,12 +37,12 @@ export class TabletEditInfoComponent implements OnInit {
 
             let acampus = this.tablet.Campus;
 
-            if (acampus.length == 1) {
+            if (acampus.length === 1) {
 
-                acampus = (acampus == "E") ? "East" : "West";
+                acampus = (acampus === 'E') ? 'East' : 'West';
             }
             
-            this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == acampus);
+            this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus === acampus);
 
             this.tablet.Campus = acampus;
 
@@ -55,7 +55,7 @@ export class TabletEditInfoComponent implements OnInit {
      campusChanged(value: any): void {
    
         this.tablet.Campus = value;
-        this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == value);
+        this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus === value);
     }
 
     unitChanged(value: any): void {
