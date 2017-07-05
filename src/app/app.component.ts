@@ -30,7 +30,6 @@ export class AppComponent {
 
     checkRouterEvent(routerEvent: Event): void {
 
-
         if (routerEvent instanceof NavigationStart) {
             this.loading = true;
             console.log('navstart:' + this.loading)

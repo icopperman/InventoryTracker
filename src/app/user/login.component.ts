@@ -14,21 +14,58 @@ export class LoginComponent {
 
     errorMessage: string;
     pageTitle = 'Log In';
-    userName = 'irc9012';
-    password = 'Word20nyh!';
-    // tslint:disable-next-line:no-trailing-whitespace
-    
+    userName = "irc9012";
+    password = "Word20nyh!";
+    loading: boolean = false;
 
     constructor(
         // private authService: AuthService,
         private userLoginService: UserLoginService,
         private router: Router) { }
 
-    loginComplete(theUser: IUserLogin) {
+    login(loginForm: NgForm) {
+
+        if (loginForm && loginForm.valid) {
+
+            let userName = loginForm.form.value.userName;
+            let password = loginForm.form.value.password;
+            this.loading = true;
+
+            this.userLoginService.login(userName, password)
+                        .subscribe(this.loginComplete, this.handleError)
+                // .subscribe(
+                // (theuser: IUserLogin) => {B
+
+                //     console.log('here');
+
+                //     if (_.isEmpty(this.userLoginService.redirectUrl) == false) {
+
+                //         this.router.navigateByUrl(this.userLoginService.redirectUrl);
+
+                //     }
+                //     else {
+
+                //         this.router.navigate(['/units']);
+                //     }
+                // },
+                // this.handleError
+                // );
+
+
+        }
+        else {
+
+            this.errorMessage = 'Please enter a user name and password.';
+        
+        }
+    }
+
+    loginComplete = (theUser: IUserLogin) => {
 
         console.log('here');
+        this.loading = false;
 
-        if ( _.isEmpty(this.userLoginService.redirectUrl) === false ) {
+        if (_.isEmpty(this.userLoginService.redirectUrl) == false) {
 
             this.router.navigateByUrl(this.userLoginService.redirectUrl);
 
@@ -42,42 +79,8 @@ export class LoginComponent {
     handleError = (xx: any) => {
 
         console.log('here');
+        this.loading = false;
         this.errorMessage = 'Please enter a user name and password.';
 
-    }
-
-    login(loginForm: NgForm) {
-
-        if (loginForm && loginForm.valid) {
-
-            let userName = loginForm.form.value.userName;
-            let password = loginForm.form.value.password;
-
-            this.userLoginService.login(userName, password)
-                .subscribe(
-                (theuser: IUserLogin) => {
-                    
-                    console.log('here');
-
-                    if ( _.isEmpty(this.userLoginService.redirectUrl) === false) {
-
-                        this.router.navigateByUrl(this.userLoginService.redirectUrl);
-
-                    }
-                    else {
-
-                        this.router.navigate(['/units']);
-                    }
-                },
-                this.handleError
-                );
-
-            // .subscribe(this.loginComplete, this.handleError)
-
-        }
-        else {
-
-            this.errorMessage = 'Please enter a user name and password.';
-        };
     }
 }

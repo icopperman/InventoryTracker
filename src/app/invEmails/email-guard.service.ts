@@ -7,10 +7,14 @@ import { EmailEditComponent } from './email-edit.component';
 export class EmailEditGuard implements CanDeactivate<EmailEditComponent> {
 
     canDeactivate(component: EmailEditComponent): boolean {
+       
         if (component.isDirty) {
+        
             let emailName = component.email.EmailAddress || 'New Email';
             return confirm(`Navigate away and lose all changes to ${emailName}?`);
+        
         }
+        
         return true;
     }
 }
