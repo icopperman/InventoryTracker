@@ -22,18 +22,18 @@ import { SharedService } from '../shared/shared.service';
       {
         path: '',
         component: UnitListComponent,
-        data: { func: 'getunits', origin: "from :'', unitListcomponent", idx: 0}
+        data: { func: 'getunits', origin: 'from :, unitListcomponent', idx: 0}
       },
       {
         path: ':id',
         component: UnitDetailComponent,
-        data: { func: 'getunit', origin: "from :'id', unitDetailComponent", idx: 1},
+        data: { func: 'getunit', origin: 'from :id, unitDetailComponent', idx: 1},
         resolve: { unit: UnitResolver }
       },
       {
         path: ':id/edit',
         component: UnitEditComponent,
-        data: { func: 'edit', origin: "from :'id/', unitEditComponent", idx: 2},
+        data: { func: 'edit', origin: 'from :id/, unitEditComponent', idx: 2},
         resolve: { unit: UnitResolver },
         canDeactivate: [UnitEditGuard],
         children: [
@@ -56,7 +56,7 @@ import { SharedService } from '../shared/shared.service';
       , {
         path: ':id/delete',
         component: UnitEditComponent,
-        data: { func: 'delete', origin: "from :'id/', unitEditComponent delete", idx: 2},
+        data: { func: 'delete', origin: 'from :id/, unitEditComponent delete', idx: 2},
         resolve: { unit: UnitResolver },
         canDeactivate: [UnitEditGuard],
         children: [

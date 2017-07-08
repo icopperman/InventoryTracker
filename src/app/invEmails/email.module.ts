@@ -25,21 +25,21 @@ import { SharedService } from '../shared/shared.service';
         path: '',
         component: EmailListComponent,
         resolve: { email: EmailResolver },
-        data: { origin: "from :'', emailListcomponent", idx: 0}
+        data: { origin: 'from :, emailListcomponent', idx: 0}
       },
       {
         path: ':id',
         component: EmailDetailComponent,
         resolve: { email: EmailResolver },
 
-        data: { origin: "from :id, emaildetailcomponent", idx: 1}
+        data: { origin: 'from :id, emaildetailcomponent', idx: 1}
       },
       {
         path: ':id/edit',
         component: EmailEditComponent,
         resolve: { email: EmailResolver,
                    units: EmailUnitsResolver  },
-        data: { origin: "from :id/edit, emaileditcomponent", idx: 2},
+        data: { origin: 'from :id/edit, emaileditcomponent', idx: 2},
         canDeactivate: [EmailEditGuard],
         children: [
           {

@@ -19,7 +19,7 @@ import { SharedService } from '../shared/shared.service';
 export class UserLoginService {
 
     currentUser: IUserLogin;
-    redirectUrl: string = "";
+    redirectUrl: string = '';
 
     // private baseUrl = 'http://webdev.nyp.org/InventoryTrackerSvc';
     private baseURL = ''; // 'http://localhost:58087';
@@ -34,7 +34,7 @@ export class UserLoginService {
 
         let rc: boolean = _.isEmpty(this.currentUser);
 
-        return !rc ;//!!this.currentUser;
+        return !rc ; // !!this.currentUser;
 
     }
 
@@ -68,10 +68,10 @@ export class UserLoginService {
 
         let body = response.json();
 
-        if (body.Status == 'error') {
+        if (body.Status === 'error') {
 
             console.log(body.Status + ',' + body.ErrMsg);
-            throw new Error("Server Error - " + body.ErrMsg);
+            throw new Error('Server Error - ' + body.ErrMsg);
             //return Observable.throw('Server error - cwid not recognized');
 
         }
@@ -79,20 +79,20 @@ export class UserLoginService {
         let auser: IUserLogin = <IUserLogin>body;
 
         
-            let userType: string = "User";
+            let userType: string = 'User';
 
             switch (auser.isAdmin) {
 
-                case 'Y': userType = "Admin"; break;
-                case 'N': userType = "User"; break;
-                case 'X': userType = "Non-Clinical"; break;
+                case 'Y': userType = 'Admin'; break;
+                case 'N': userType = 'User'; break;
+                case 'X': userType = 'Non-Clinical'; break;
             }
 
             //if (_.isEmpty(auser.firstName) == true) auser.firstName = "";
             //if (_.isEmpty(auser.lastName) == true) auser.lastName = "";
 
             auser.isAdmin = userType;
-            auser.preferredCampus = (auser.preferredCampus == 'E') ? "East" : "West";
+            auser.preferredCampus = (auser.preferredCampus === 'E') ? 'East' : 'West';
             this.currentUser = auser;
 
             return auser;
@@ -193,3 +193,5 @@ export class UserLoginService {
         //     userName: userName,
         //     isAdmin: false
         // };
+    
+    

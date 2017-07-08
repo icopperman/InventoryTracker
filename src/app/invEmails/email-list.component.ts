@@ -41,9 +41,9 @@ export class EmailListComponent implements OnInit {
                 .subscribe(emails => {
                     
                     this.emails = _.map(emails, (aemail: IEmail) => { 
-                        aemail.Campus = (aemail.Campus == 'E') ? "East" : "West";
+                        aemail.Campus = (aemail.Campus === 'E') ? 'East' : 'West';
                         return aemail;
-                    })
+                    });
                  },
                  error => this.errorMessage = <any>error);
                  

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import * as _ from 'lodash';
+//import * as _ from 'lodash';
 
 import { IUser } from './user';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import * as _ from 'lodash';
+//import * as _ from 'lodash';
 
 import { MessageService } from '../messages/message.service';
 

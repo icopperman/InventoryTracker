@@ -22,18 +22,18 @@ import { SharedService } from '../shared/shared.service';
       {
         path: '',
         component: UserListComponent,
-        data: { origin: "from :'', userListcomponent", idx: 0}
+        data: { origin: 'from :, userListcomponent', idx: 0}
       },
       {
         path: ':id',
         component: UserDetailComponent,
-        data: { origin: "from :'', userDetailcomponent", idx: 1},
+        data: { origin: 'from :, userDetailcomponent', idx: 1},
         resolve: { user: UserResolver }
       },
       {
         path: ':id/edit',
         component: UserEditComponent,
-        data: { origin: "from :'id/', userEditComponent", idx: 2},
+        data: { origin: 'from :id/, userEditComponent', idx: 2},
         resolve: { user: UserResolver },
         canDeactivate: [UserEditGuard],
         children: [

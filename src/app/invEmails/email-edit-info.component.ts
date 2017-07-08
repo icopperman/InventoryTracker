@@ -18,6 +18,20 @@ import { IUnit } from '../invUnits/unit';
 export class EmailEditInfoComponent implements OnInit {
     @ViewChild(NgForm) emailForm: NgForm;
 
+    private emailValidationMessages = {
+        required: 'Email address is required.',
+        minlength: 'Email address must be at least three characters.',
+        email: 'Enter a valid email address'
+    };
+
+  private campusValidationMessages = {
+        required: 'Campus is required.'
+    };  
+
+    private unitsValidationMessages = {
+        required: 'Unit is required.'
+    };
+    
     errorMessage: string;
     email: IEmail;
     units: IUnit[];
@@ -34,19 +48,6 @@ export class EmailEditInfoComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
 
-    private emailValidationMessages = {
-        required: 'Email address is required.',
-        minlength: 'Email address must be at least three characters.',
-        email: 'Enter a valid email address'
-    }
-
-    private campusValidationMessages = {
-        required: 'Campus is required.'
-    };
-
-    private unitsValidationMessages = {
-        required: 'Unit is required.'
-    };
 
 
     emailChanges(c: AbstractControl): void {
@@ -71,7 +72,7 @@ export class EmailEditInfoComponent implements OnInit {
         if (c.pristine === false) {
 
             this.email.Campus = c.value;
-            this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus == c.value);
+            this.units = _.filter(this.origUnits, (unit: IUnit) => unit.campus === c.value);
         }
 
         if ((c.touched || c.dirty) && c.errors) {
@@ -105,7 +106,7 @@ export class EmailEditInfoComponent implements OnInit {
 
         }
 
-        if (c.pristine == false) {
+        if (c.pristine === false) {
 
             this.email.Unit = c.value;
 

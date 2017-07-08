@@ -25,13 +25,13 @@ import { SharedService } from '../shared/shared.service';
         path: '',
         component: TabletListComponent,
         //resolve: { tablets: TabletResolver },
-        data: { origin: "from :'', tabletListcomponent", idx: 0}
+        data: { origin: 'from :, tabletListcomponent', idx: 0}
 
       },
       {
         path: ':id',
         component: TabletDetailComponent,
-        data: { origin: "from :'id', tabletDetailcomponent", idx: 1},
+        data: { origin: 'from :id, tabletDetailcomponent', idx: 1},
         resolve: { tablet: TabletResolver }
       },
       {
@@ -39,7 +39,7 @@ import { SharedService } from '../shared/shared.service';
         component: TabletEditComponent,
         resolve: { tablet: TabletResolver,
                    units: TabletUnitsResolver   },
-        data: { origin: "from :'id/edit', tabletEditcomponent", idx: 2},
+        data: { origin: 'from :id/edit, tabletEditcomponent', idx: 2},
         canDeactivate: [TabletEditGuard],
         children: [
           {

@@ -80,7 +80,7 @@ export class EmailService {
         let body = response.json();
         let xx = body.EmailAddresses;
 
-        if ( xx.length == 1) {
+        if ( xx.length === 1) {
             return xx[0];
         }
         else {

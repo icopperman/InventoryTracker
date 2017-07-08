@@ -28,7 +28,7 @@ export class EmailEditComponent implements OnInit {
         
         let currEmail;
 
-        if (_.isEmpty(this.currentEmail) == true) {
+        if (_.isEmpty(this.currentEmail) === true) {
         
             return false;
         }
@@ -47,7 +47,7 @@ export class EmailEditComponent implements OnInit {
     set email(value: IEmail) {
 
         this.currentEmail = value;
-        this.currentEmail.Campus = (this.currentEmail.Campus == 'E' ) ? 'East' : 'West';
+        this.currentEmail.Campus = (this.currentEmail.Campus === 'E' ) ? 'East' : 'West';
 
         // Clone the object to retain a copy
         this.originalEmail = Object.assign({}, value);
@@ -179,13 +179,6 @@ export class EmailEditComponent implements OnInit {
         //     this.dataIsValid['tags'] = false;
         // }
     }
-    
-    // emailValidator(email: string): boolean {
-    //     var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    //     if (!EMAIL_REGEXP.test(email)) {
-    //         return false;
-    //     }
-    //     return true; 
-    // }
+   
+   
 }
