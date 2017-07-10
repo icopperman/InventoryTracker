@@ -7,18 +7,14 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-2">Filter by:</div>
-            <div class="col-md-4">
-                <input type="text" [(ngModel)]="listFilter" />
-            </div>
+            <div class="col-md-4"><input type="text" [(ngModel)]="listFilter" /></div>
             <div class="col-md-2 pull-right">
                <a [routerLink]="['/emails', 0, 'edit']" class="btn btn-primary">Add Email</a>
             </div>
 
         </div>
         <div class="row" *ngIf="listFilter">
-            <div class="col-md-6">
-                <h3>Filtered by: {{listFilter}} </h3>
-            </div>
+            <div class="col-md-6"><h3>Filtered by: {{listFilter}} </h3> </div>
         </div>
 
         <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
@@ -27,46 +23,21 @@
             <table class="table" *ngIf="emails && emails.length">
                 <thead>
                     <tr>
-                        <!--<th>
-                            <button class="btn btn-primary"
-                                (click)="toggleImage()">
-                                {{showImage ? "Hide" : "Show"}} Image
-                            </button>
-                        </th>-->
                         <th>Email</th>
                         <th>Campus</th>
                         <th>Unit Name</th>
-                        <!--<th>Price</th>
-                        <th>5 Star Rating</th>-->
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let email of emails | emailFilter:listFilter">
-                        <!--<td>
-                            <img *ngIf="showImage && email.imageUrl"
-                                 [src]="email.imageUrl"
-                                 [title]="email.emailName | uppercase"
-                                 [style.width.px]="imageWidth" 
-                                 [style.margin.px]="imageMargin">
-                        </td>-->
-                        <td><a [routerLink]="[email.tblIdx]" 
-                               [queryParams]="{filterBy: listFilter }">
-                            {{email.EmailAddress}}
-                            </a>
+                        <td>
+                            <a [routerLink]="[email.tblIdx]" [queryParams]="{filterBy: listFilter }"> {{email.EmailAddress}}</a>
                         </td>
                         <td>{{ email.Campus }}</td>
                         <td>{{ email.Unit }}</td>
                        <td>
-                            <a class="btn btn-primary" 
-                               [routerLink]="[email.tblIdx, 'edit']">
-                                Edit
-                            </a>
+                            <a [routerLink]="[email.tblIdx, 'edit']" class="btn btn-primary"> Edit </a>
                         </td>
-                        <!--<td>{{ email.emailAddress | lowercase }}</td>-->
-                        <!--<td>
-                            <ai-star [rating]="email.starRating">
-                            </ai-star>
-                       </td>-->
                     </tr>
                 </tbody>
             </table>

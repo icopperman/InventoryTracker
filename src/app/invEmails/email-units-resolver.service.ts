@@ -13,25 +13,28 @@ import { UnitService } from '../invUnits/unit.service';
 @Injectable()
 export class EmailUnitsResolver implements Resolve<IUnit[]> {
 
-    constructor(private unitService: UnitService,
-        private router: Router) { }
+    constructor(private unitService: UnitService, private router: Router) { }
 
-    resolve(route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<IUnit[]> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IUnit[]> {
 
         return this.unitService.getUnits()
             .map(unit => {
-                if (unit) {
-                    return unit;
-                }
+
+                if (unit) { return unit; }
+
                 console.log(`Units was not found`);
                 this.router.navigate(['/emails']);
+                
                 return null;
+
             })
             .catch(error => {
+                
                 console.log(`Retrieval error: ${error}`);
+                
                 this.router.navigate(['/emails']);
                 return Observable.of(null);
+                
             });
 
     }

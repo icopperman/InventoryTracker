@@ -8,6 +8,7 @@ import {IUnit} from '../invUnits/unit';
     templateUrl: './app/invEmails/email-detail.component.html'
 })
 export class EmailDetailComponent implements OnInit {
+    
     pageTitle: string = 'Email Detail';
     email: IEmail;
     units: IUnit[];
@@ -17,7 +18,7 @@ export class EmailDetailComponent implements OnInit {
 
     ngOnInit(): void {
         
-        this.email = this.route.snapshot.data['email'];
+        this.email = this.route.snapshot.data['emails'][0];
    
         //this.units = this.route.snapshot.data['units'];
     }

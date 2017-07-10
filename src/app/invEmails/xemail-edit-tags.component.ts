@@ -15,7 +15,7 @@ export class EmailEditTagsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.parent.data.subscribe(data => {
-            this.email = data['email'];
+            this.email = data['emails'][0];
         });
     }
 

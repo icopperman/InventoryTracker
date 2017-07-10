@@ -10,7 +10,7 @@ import { EmailEditInfoComponent } from './email-edit-info.component';
 import { UnitService } from '../invUnits/unit.service';
 import { EmailService } from './email.service';
 import { EmailResolver } from './email-resolver.service';
-import { EmailUnitsResolver} from './email-units-resolver.service';
+import { EmailUnitsResolver } from './email-units-resolver.service';
 import { EmailFilterPipe } from './email-filter.pipe';
 import { EmailEditGuard } from './email-guard.service';
 
@@ -24,22 +24,24 @@ import { SharedService } from '../shared/shared.service';
       {
         path: '',
         component: EmailListComponent,
-        resolve: { email: EmailResolver },
-        data: { origin: 'from :, emailListcomponent', idx: 0}
+        resolve: { emails: EmailResolver },
+        data: { origin: 'from :, emailListcomponent', idx: 0 }
       },
       {
         path: ':id',
         component: EmailDetailComponent,
-        resolve: { email: EmailResolver },
+        resolve: { emails: EmailResolver },
 
-        data: { origin: 'from :id, emaildetailcomponent', idx: 1}
+        data: { origin: 'from :id, emaildetailcomponent', idx: 1 }
       },
       {
         path: ':id/edit',
         component: EmailEditComponent,
-        resolve: { email: EmailResolver,
-                   units: EmailUnitsResolver  },
-        data: { origin: 'from :id/edit, emaileditcomponent', idx: 2},
+        resolve: {
+          emails: EmailResolver,
+          units: EmailUnitsResolver
+        },
+        data: { origin: 'from :id/edit, emaileditcomponent', idx: 2 },
         canDeactivate: [EmailEditGuard],
         children: [
           {

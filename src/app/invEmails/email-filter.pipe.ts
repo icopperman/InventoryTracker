@@ -10,8 +10,8 @@ export class EmailFilterPipe implements PipeTransform {
 
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
-        
         return filterBy ? value.filter((email: IEmail) =>
             email.EmailAddress.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+
     }
 }

@@ -48,8 +48,6 @@ export class EmailEditInfoComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
 
-
-
     emailChanges(c: AbstractControl): void {
 
         this.emailMessage = '';
@@ -132,7 +130,7 @@ export class EmailEditInfoComponent implements OnInit {
 
         this.route.parent.data.subscribe(data => {
 
-            this.email = data['email'];
+            this.email = data['emails'][0];
             this.origUnits = data['units'];
             this.ccs = ['East', 'West'];
 

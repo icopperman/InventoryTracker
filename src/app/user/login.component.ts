@@ -80,7 +80,7 @@ export class LoginComponent {
 
         console.log('here');
         this.loading = false;
-        this.errorMessage = 'Please enter a user name and password.';
+        this.errorMessage = xx; //'Please enter a user name and password.';
 
     }
 }

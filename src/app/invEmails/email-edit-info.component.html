@@ -1,7 +1,8 @@
+start edit info component >
 <div class="panel-body">
     
     <form class="form-horizontal" novalidate [formGroup]="emailFormGroup">
-    
+   
         <fieldset>
     
             <legend>Basic email Information</legend>
@@ -39,6 +40,7 @@
         </fieldset>
     </form>
 </div>
+< end edit info component
             <!--(emailFormGroup.get('emailName').touched || emailFormGroup.get('emailName').dirty || emailClass.tblIdx !== 0 ) && !emailFormGroup.get('emailName').valid -->
                     <!--(emailFormGroup.get('emailName').touched || emailFormGroup.get('emailName').dirty ||  emailClass.tblIdx !== 0 ) && emailFormGroup.get('emailName').errors -->
                         <!--<span *ngIf="emailFormGroup.get('emailName').errors.required">Email address is required.</span>

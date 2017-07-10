@@ -11,20 +11,31 @@ import { IEmail } from './email';
 import { EmailService } from './email.service';
 
 @Injectable()
-export class EmailResolver implements Resolve<IEmail> {
+export class EmailResolver implements Resolve<IEmail[]> {
 
-    constructor(private emailService: EmailService,
-        private router: Router) { }
+    constructor(private emailService: EmailService,  private router: Router) { }
 
-    resolve(route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<IEmail> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEmail[]> {
 
         let xx = route.data;
 
         switch (xx.idx) {
+            
             case 0:
                 console.log(xx.origin);
-                break;
+                return this.emailService.getEmails()
+                    .map(emails => {
+                        if ( emails) {
+                            return emails;
+                        }
+                        this.router.navigate(['/home']);
+                        return null;
+                    })
+                    .catch( error => {
+                        console.log(`Retrieval error: ${error}`);
+                        this.router.navigate(['/emails']);
+                        return Observable.of(null);
+                    });
 
             case 1:
             case 2:
@@ -36,6 +47,7 @@ export class EmailResolver implements Resolve<IEmail> {
                     this.router.navigate(['/emails']);
                     return Observable.of(null);
                 }
+                
                 return this.emailService.getEmail(+id)
                     .map(email => {
                         if (email) {
@@ -50,7 +62,6 @@ export class EmailResolver implements Resolve<IEmail> {
                         this.router.navigate(['/emails']);
                         return Observable.of(null);
                     });
-
 
         }
 

@@ -110,7 +110,7 @@ export class UserLoginService {
         }
         else {
 
-            return Observable.throw(error.json().error || 'Server error');
+            return Observable.throw('Server error');
 
         }
 
